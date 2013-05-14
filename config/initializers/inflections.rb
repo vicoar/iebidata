@@ -8,8 +8,25 @@
 #   inflect.irregular 'person', 'people'
 #   inflect.uncountable %w( fish sheep )
 # end
-#
-# These inflection rules are supported but not enabled by default:
-# ActiveSupport::Inflector.inflections do |inflect|
-#   inflect.acronym 'RESTful'
-# end
+
+#Obtenido de: http://damncorner.blogspot.com/2009/06/ruby-on-rails-inflector-en-espanol.html
+
+# Limpiamos todas las inflecciones existentes
+ActiveSupport::Inflector.inflections.clear
+
+# Agregamos las reglas de inflecci�n
+ActiveSupport::Inflector.inflections do |inflect|
+  	inflect.uncountable 'recuperar'
+	#inflect.plural /^(ox)$/i, '\1en'
+	#inflect.singular /^(ox)en/i, '\1'
+	#inflect.irregular 'person', 'people'
+	#inflect.uncountable %w( fish sheep )
+	inflect.plural /([taeiou])([A-Z]|_|$)/, '\1s\2'
+	inflect.plural /([rlnd])([A-Z]|_|$)/, '\1es\2'
+	inflect.plural /(is)([A-Z]|_|$)/, '\1es'
+	inflect.plural /(i)(z)([A-Z]|_|$)/, '\1ces'
+	inflect.singular /([taeiou])s([A-Z]|_|$)/, '\1\2'
+	inflect.singular /([rlnd])es([A-Z]|_|$)/, '\1\2'
+	inflect.singular /ises([A-Z]|_|$)/, '\1is'
+	inflect.singular /ices([A-Z]|_|$)/, '\1iz'
+end

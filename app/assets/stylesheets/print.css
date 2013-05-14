@@ -1,0 +1,16 @@
+body { 
+  color : #000000; 
+  background : #ffffff;
+  font-size : 12pt; 
+}
+
+a { 
+  text-decoration : none; 
+  color : #000; 
+}
+
+.noprint,
+#logo, #header, #menu, #buscador, #footer,
+button, .button, button.visible, .button.visible { 
+  display : none !important; 
+}

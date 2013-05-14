@@ -1,14 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Iebidata</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="">
+  	<meta name="author" content="">
+  	
+	<%= favicon_link_tag %>
 
-<%= yield %>
+	<%= csrf_meta_tag %>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="imagetoolbar" content="no">
+	
+	<title><%= yield :title %> - IEBIData</title>
+		
+	<%= stylesheet_link_tag "reset", "grid", "type", "plugins/gadgets", "plugins/percent-grid", 
+		"dropdown", "default.advanced", "default",
+		"jquery-ui", "iphone", "plupload.queue", "styles.css", 
+		:media => "all" %>
+	
+	 <!--[if lte IE 6]>
+	 <link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="screen, projection">
+	 <![endif]-->
+	 
+	 <%= stylesheet_link_tag "print", :media => "print" %>
+	 
+	 <%= yield :head %><!-- gmaps4rails -->
+	
+</head>
+
+<body>
+<div id="wrapper">
+
+	<div id="logo">
+		<a href="/">
+			<%= image_tag "logo.png"%>
+		</a>
+	</div>
+	
+	<div id="header">
+		<a href="/">
+			<%= image_tag "iebidata.png"%>
+		</a>
+	</div>
+	
+	<br class="clear noprint" />
+	
+	<% cache 'menu' do %>
+		
+		<div id="menu" class="hp">
+			<ul id="nav" class="dropdown dropdown-horizontal">
+				<li class="first"><%= link_to "Inicio", root_path %></li>
+				<li><%= link_to "Mi cuenta", cuenta_path %></li>
+				<li><%= link_to "Taxones", taxones_path, :class => "dir" %>
+					<ul> 
+						<% Categoria.all.each do |categoria| %>
+							<li><%= link_to categoria.nombre, categoria_taxones_path(categoria) %>
+						<% end %>
+					</ul> 
+				</li>
+				<li><%= link_to "Muestreos", muestreos_path, :class => "dir" %>
+					<ul>
+						<li><%= link_to "Sitios", sitios_path %></li>
+						<li><%= link_to "Muestras", muestras_path %></li>
+						<li><%= link_to "Ejemplares", ejemplares_path %></li>
+					</ul>
+				</li>
+				<li><%= link_to "Colecciones", colecciones_path %></li>
+				<li><%= link_to "Claves", claves_path %></li>
+				<li class="last"><%= link_to "Reportar un error", error_path, { :class => :error } %></li>
+			</ul>
+		</div><!-- #menu -->
+	
+		<br class="clear noprint" />
+		
+		<div id="buscador">
+			<%= form_for Busqueda.new do |f| %> 
+				<%= f.label :nombre, 'Buscar:' %>
+				<%= f.text_field :nombre %>
+				
+				<%= f.label :categoria_id, 'en' %>
+				<%= f.collection_select :categoria_id, Categoria.all, :id, :nombre, :prompt => " - Todas - " %>
+				<button class="small white" type="submit">Buscar</button>
+			<% end %>
+		</div>
+	
+	<% end %><!-- cache -->
+	
+	<div id="content">
+	
+		<div id="flash" class="unit">
+			
+			<div class="notice ui-state-highlight ui-corner-all"> 
+				<p>
+					<span class="ui-icon ui-icon-circle-check "></span>
+					<b>Bien!</b><span class="message"></span>
+					<span class="close"><a href="#">[cerrar]</a></span>
+				</p>
+			</div>
+		
+			<div class="error ui-state-error ui-corner-all"> 
+				<p>
+					<span class="ui-icon ui-icon-alert"></span> 
+					<b>Ups!</b><span class="message"></span>
+					<span class="close"><a href="#">[cerrar]</a></span>
+				</p>
+			</div>
+			
+		</div>
+		
+		<div class="contenido" class="dp100 clearfix">
+			<%= yield %>
+		</div>
+	</div>
+	
+	<div class="push noprint"></div>
+
+</div><!-- #wrapper -->
+
+<div id="footer">
+	<h2>Copyright (c) 2011</h2> 
+</div>
+
+<%= javascript_include_tag "head.load.min.js" %>
+
+<script type="text/javascript">
+	head.js(
+	   {jquery: "http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"},
+	   {eventos: "<%= javascript_path "events.js" %>"}
+	)
+</script>
+
+<script type="text/javascript">
+  if (document.location.host.indexOf(':3000') < 0){
+      /* Google Analytics */
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-23173167-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+  }
+</script>
+
+<%= yield :scripts %><!-- gmaps4rails -->
 
 </body>
 </html>
