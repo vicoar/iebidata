@@ -1,0 +1,21 @@
+<% title "Lista de Muestras" %>
+
+<h1><%= yield :title %></h1>
+
+<table class="lista zebra">
+  <tr>
+    <th>Numero</th>
+	<th>Sitio</th>
+  </tr>
+
+<% @muestras.each do |muestra| %>
+  <tr>
+    <td><%=link_to muestra.nombre, muestra %></td>
+    <td><%= muestra.sitio.nombre %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= paginate @muestras %>

@@ -1,0 +1,65 @@
+<% title "Muestreo: #{ @muestreo.nombre}"%>
+	<h1><%= yield :title %></h1>
+	
+	<% cache "muestreos/#{@muestreo.id}/show" do %>
+	
+	<table class="fields">
+		<tr>
+			<td>Autor:</td>
+			<td><%= @muestreo.usuario.nombre %></td>
+		</tr>
+		<tr>
+			<td>Nombre:</td>
+			<td><%= @muestreo.nombre %></td>
+		</tr>
+		<tr>
+			<td>Fecha:</td>
+			<td><%= @muestreo.fecha %></td>
+		</tr>
+	</table>
+	
+	
+	<p> 
+		<%= button_link 'Editar', edit_muestreo_path(@muestreo), "blue" %>
+		<%= delete_button @muestreo %>
+		<%= button_link 'Volver a Lista', muestreos_path, "black" %>
+	</p>
+<% end %>
+
+<hr />
+
+
+<fieldset>
+	<legend>Sitios</legend>
+	
+	<% if @muestreo.sitios.count > 0 %>
+	
+		<%= mapa(@muestreo.sitios) %>
+
+		<br />
+		<% cache "muestreos/#{@muestreo.id}/sitios" do %>
+			<table id="sitios" class="lista zebra">
+				<tr class="cabecera">
+					<th>Nombre</th>
+					<th>Fecha</th>
+					<th>Ecoregion</th>
+					<th>Ubicacion</th>
+				</tr>
+			  
+				<% @muestreo.sitios.each do |sitio| %>
+					<tr>
+						<td><%= link_to sitio.nombre, sitio %></td>
+						<td><%= sitio.fecha %></td>
+						<td><%= sitio.ecoregion %></td>
+						<td><%= sitio.ubicacion %></td>
+					</tr>
+				<% end %>
+			</table>
+        <% end %>
+	<% end %>
+	
+	<p>
+		<%= button_link 'Agregar Sitio', new_muestreo_sitio_path(@muestreo), "orange" %>
+	</p>
+</fieldset>
+

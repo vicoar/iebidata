@@ -1,0 +1,23 @@
+<%= f.error_messages %>
+
+<table class="fields">
+  <tr>
+    <td><%= f.label :parent_id, 'Dilema anterior' %></td>
+    <td><%= f.select :parent_id, dilema_anterior(clave) {|i| "#{'–––|' * i.level}–––  #{i.dilema}" }, { :include_blank => true } %></td>
+  </tr>
+  <tr class="required">
+    <td><%= f.label :dilema, 'Dilema actual' %></td>
+    <td><%= f.text_field :dilema %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :taxon_id, 'Taxon (registrado)' %></td>
+    <td><%= f.select :taxon_id, Taxon.all.map {|i| ["#{'–––|' * i.level}––– #{i.categoria.nombre}: #{i.nombre}", i.id] }, { :include_blank => true } %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :taxon_nombre, 'Taxon (no registrado)' %></td>
+    <td><%= f.text_field :taxon_nombre %></td>
+  </tr>
+    <td><%= f.label :cometario %></td>
+    <td><%= f.text_area :comentario %></td>
+  </tr>
+</table>

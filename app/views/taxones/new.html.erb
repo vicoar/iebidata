@@ -1,0 +1,20 @@
+<% title "Nuevo Taxon"%>
+
+<%= raw breadcrums(@taxon) %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@taxon, :url => taxones_path) do |f| %>
+
+   <%= render :partial => "form", :locals => { :f => f, :taxon => @taxon } %>
+   
+  <p>
+    <button type="submit" class="green">Crear</button>
+	<% if @taxon.parent %>
+		<%= button_link "Volver a #{@taxon.parent.nombre}", @taxon.parent, "rosy" %>
+	<% else %>
+		<%= button_link "Volver a Lista", taxones_path, "black" %>
+	<% end %>
+  </p>
+<% end %>
+

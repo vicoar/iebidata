@@ -1,0 +1,14 @@
+<% title "Editar Categoria"%>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@categoria) do |f| %>
+  
+  <%= render :partial => "form", :locals => { :f => f } %>
+  
+  <p>
+    <button type="submit" class="blue">Actualizar</button>
+	<%= button_link 'Cancelar', @categoria, "gray" %>
+	<%= button_link 'Volver a Lista', categorias_path, "black" %>
+  </p>
+<% end %>

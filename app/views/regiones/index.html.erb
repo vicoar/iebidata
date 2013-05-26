@@ -1,0 +1,25 @@
+<% title "Lista de Regiones"%>
+
+<h1><%= yield :title %></h1>
+
+<table class="lista zebra">
+  <tr>
+  	<th>Nombre</th>
+    <th>Pais</th>
+    <th>Codigo</th>
+    <th>Adm1</th>
+  </tr>
+
+<% @regiones.each do |region| %>
+  <tr>
+  	<td><%=link_to h(region.nombre), region %></td>
+    <td><%=h region.pais.nombre %></td>
+    <td><%=h region.codigo %></td>
+    <td><%=h region.ADM1 %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= paginate @regiones %>

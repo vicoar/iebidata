@@ -1,0 +1,83 @@
+  	<%= f.error_messages %>
+	
+	<table class="fields">
+		<tr class="required">
+			<td><%= f.label :nombre %></td>
+			<td><%= f.text_field :nombre %></td>
+		</tr>
+		
+		<tr class="required">
+			<td><%= f.label :nombre_ingles %></td>
+			<td><%= f.text_field :nombre_ingles %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :FIPS104 %></td>
+			<td><%= f.text_field :FIPS104 %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :ISO2,"ISO 2" %></td>
+			<td><%= f.text_field :ISO2 %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :ISO3,"ISO 3" %></td>
+			<td><%= f.text_field :ISO3 %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :ISON,"ISON" %></td>
+			<td><%= f.text_field :ISON %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :internet,"Extension de Internet" %></td>
+			<td><%= f.text_field :internet %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :capital %></td>
+			<td><%= f.text_field :capital %></td>
+		</tr>
+		
+		<tr class="required">
+			<td><%= f.label :continente %></td>
+			<td><%= f.text_field :continente %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :nacionalidad_singular %></td>
+			<td><%= f.text_field :nacionalidad_singular %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :nacionalidad_plural %></td>
+			<td><%= f.text_field :nacionalidad_plural %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :moneda %></td>
+			<td><%= f.text_field :moneda %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :moneda_simbolo %></td>
+			<td><%= f.text_field :moneda_simbolo %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :poblacion %></td>
+			<td><%= f.text_field :poblacion %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :titulo %></td>
+			<td><%= f.text_field :titulo %></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :comentario %></td> 
+			<td><%= f.text_field :comentario %></td>
+		</tr>
+	</table>

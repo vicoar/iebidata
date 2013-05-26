@@ -1,0 +1,79 @@
+<%
+subcatSelecId = subcatSelecId || 0
+base = "taxones/#{taxon.id}/"
+
+unless controller.fragment_exist?(base + "subcategorias/#{subcatSelecId}") && controller.fragment_exist?(base + "subcat/#{subcatSelecId}/p/#{page}")
+	subcats = taxon.subcategorias
+
+	ultimaCat = Categoria.final
+	
+	if subcats.empty?
+	    subcats = [taxon.categoria.siguiente]
+	end
+	
+	if subcats.include? ultimaCat
+	    ultimaCat = nil
+	end
+	
+	if subcatSelecId != 0
+	    subcatSelec = Categoria.find subcatSelecId
+	else
+	    subcatSelec = subcats.first
+	end
+	
+	hijos = taxon.hijos(subcatSelec).page(page)
+end
+
+%>
+
+
+<div id="subcategorias" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+	
+	<% cache "taxones/#{taxon.id}/subcategorias/#{subcatSelecId}" do %>
+		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+			<% subcats.each do |subcat| %>
+				<li class="ui-state-default ui-corner-top <%= "ui-tabs-selected  ui-state-active" if subcat == subcatSelec %>">
+					<%= link_to subcat.nombre, :categoria => subcat.id %>
+				</li>
+			<% end %>
+			<% if ultimaCat %>
+				<li class="ultimaCategoria ui-state-default ui-corner-top <%= "ui-tabs-selected  ui-state-active" if ultimaCat == subcatSelec %>">
+					<%= link_to ultimaCat.nombre, :categoria => ultimaCat.id %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+	
+	<% cache "taxones/#{taxon.id}/subcat/#{subcatSelecId}/p/#{page}" do %>
+		<div class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+			<% mostrarLista = subcatSelec.final?
+			   if mostrarLista %>
+				<!-- inicio Lista para AJAX -->
+				<div class="dp30" id="listaTaxones">
+			<% end %>
+			
+			<ul class="imenuui">
+				<% hijos.each do |taxon| %>
+					<li class="<%= taxon.visible ? 'visible' : 'novisible' %>">
+					    <%= link_to taxon.nombre, taxon %>
+					</li>
+				<% end %>
+			</ul>
+			
+			<% if mostrarLista %>
+				</div><!-- fin #listaTaxones -->
+				<div class="dp70" id="taxon">&nbsp;</div>
+			<% end %>
+			
+			<br class="clear" />
+			
+			<%= paginate hijos %>
+			
+			<br class="clear" />
+			
+			<p>
+				<%= button_link("Nuevo Taxon #{subcatSelec.nombre}", new_taxon_taxon_path(taxon, :categoria => subcatSelec), "orange") %>
+			</p>
+		</div>
+	<% end %>
+</div>

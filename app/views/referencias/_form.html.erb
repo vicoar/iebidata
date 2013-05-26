@@ -1,0 +1,42 @@
+<%= f.error_messages %>
+
+<%= f.hidden_field :taxon_id %>
+
+<table class="fields">
+  <tr class="required">
+    <td><%= f.label :autor %></td>
+    <td><%= f.text_field :autor %></td>
+  </tr>
+  <tr class="required">
+    <td><%= f.label :titulo %></td>
+    <td><%= f.text_field :titulo %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :fecha %></td>
+    <td><%= f.date_select :fecha, :start_year => Time.now.year - 100, :end_year => Time.now.year %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :editorial %></td>
+    <td><%= f.text_field :editorial %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :revista %></td>
+    <td><%= f.text_field :revista %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :isbn, 'ISSN/ISBN' %></td>
+    <td><%= f.text_field :isbn %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :archivo, 'Archivo (max 2 Mb)' %></td>
+    <td><%= f.file_field :archivo %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :palabras_claves %></td>
+    <td><%= f.text_area :palabras_claves %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :resumen %></td>
+    <td><%= f.text_area :resumen %></td>
+  </tr>
+</table>

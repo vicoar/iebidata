@@ -1,0 +1,52 @@
+<% title "Coleccion #{@coleccion.numero}" %>
+
+<h1><%= yield :title %></h1>
+
+<table class="fields">	
+	<tr>
+	  <td>Autor:</td>
+	  <td><%=h @coleccion.usuario.nombre %></td>
+	</tr>
+	
+	<tr>
+	  <td>Nombre:</td>
+	  <td><%=h @coleccion.nombre %></td>
+	</tr>
+	
+	<tr>
+	  <td>Numero:</td>
+	  <td><%=h @coleccion.numero %></td>
+	</tr>
+</table>
+
+<p>
+	<%= button_link "Editar", edit_coleccion_path(@coleccion), "blue" %>
+	<%= delete_button @coleccion %>
+	<%= button_link "Volver a Lista de Colecciones", colecciones_path, "black" %>
+</p>
+
+<fieldset>
+	<legend>Ejemplares</legend>
+	
+	<div class="resaltado">
+		<h2>&nbsp;</h2>
+		<p>Para agregar o quitar un ejemplar a esta coleccion, ingrese al ejemplar, editelo y seleccione esta colección.</p>
+		<p><%= link_to "Haga clic aqui para ver todos los ejemplares", ejemplares_path %></p>
+	</div>
+	
+	<table class="lista zebra">
+		
+		<tr>
+			<th>Nombre</th>
+			<th>Especie/Morfo</th>
+		</tr>
+		
+		<% @coleccion.ejemplares.each do |ejemplar| %>
+			<tr>
+				<td><%= link_to ejemplar.nombre, ejemplar %></td>
+				<td><%= ejemplar.taxon.nombre %></td>
+			</tr>
+		<% end %>
+		
+	</table>
+</fieldset>

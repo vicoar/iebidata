@@ -1,0 +1,90 @@
+<% title "Clave: #{h @clave.dilema}" %>
+
+<%= raw breadcrums_clave(@clave) %>
+
+<h2><%= @clave.dilema %></h2>
+
+<fieldset class="autor">
+	<legend>Detalles</legend>
+	
+	<div class="dp50">
+		<table class="fields">
+			<tr>
+				<td>Autor:</td>
+				<td><%= @clave.usuario.nombre %></td>
+			</tr>
+			<tr>
+				<td>Dilema:</td>
+				<td><%= @clave.dilema %></td>
+			</tr>
+			<tr>
+				<td>Taxon:</td>
+				<td><%= @clave.taxon ? link_to(h(@clave.taxon.nombre), @clave.taxon) : 'Ninguno' %></td>
+			</tr>
+		</table>
+		
+		<%= button_link 'Editar', edit_clave_path(@clave), 'blue' %>
+		<%= delete_button clave_path(@clave) %>
+		
+		<% if @clave.parent %>
+			<%= button_link 'Volver a la clave anterior', clave_path(@clave.parent), 'black' %>
+		<% end %>
+		
+	</div>
+	
+	<div class="dp50">
+		<p><b>Imagen para esta clave</b></p>
+		<% if @clave.imagen %>
+			<%= link_to image_tag(@clave.imagen.url(:min)), @clave.imagen %>
+			<br />
+			<%= delete_button imagen_path(@clave.imagen) %>
+		<% else %>
+			<div class='placeholder min'>&nbsp;</div>
+			<br />
+			<%= button_link 'Cargar imagen nueva', new_clave_imagen_path(@clave), 'orange' %>
+			<%= button_link 'Seleccionar imagen de un Taxon', seleccionar_imagen_clave_path(@clave), 'blue' %>
+		<% end %>
+		<br class="clear" />
+		
+	</div>
+</fieldset>
+
+<br class="clear" />
+
+<% if @clave.final? %>
+	<fieldset>
+		<legend>Resultado</legend>
+
+		<p><%= @clave.comentario %></p>
+
+		<p>
+			Las opciones elegidas dan como resultado 
+			<b><%= @clave.taxon_id ? link_to(@clave.taxon.nombre, @clave.taxon) : @clave.taxon_nombre %></b>
+		</p>
+	</fieldset>
+<% else %>
+	<fieldset>
+		<legend><%= @clave.dilema %></legend>
+		
+		<p><%= @clave.comentario %></p>
+
+		<% @clave.children.each do |subclave| %>
+			<div class="dp50">
+				<div class="clave">
+					<% if subclave.imagen %>
+						<%= link_to image_tag(subclave.imagen.url(:clave)), clave_path(subclave) %>
+					<% else %>
+						<%= link_to raw("<div class='placeholder'>&nbsp;</div>"), clave_path(subclave) %>
+					<% end %>
+					<p><%= button_link h(subclave.dilema), clave_path(subclave), 'black' %></p>
+				</div>
+			</div>
+		<% end %>
+		
+		<br class="clear" />
+		
+		<p>
+			<%= button_link "Agregar / Modificar Opciones", opciones_clave_path(@clave), "orange" %>
+		</p>
+	</fieldset>
+<% end %>

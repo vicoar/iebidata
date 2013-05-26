@@ -7,12 +7,12 @@
     .iphone.vertical {
         width:320px;
         padding:124px 41px;
-        background:url('/images/iphone/iphone-vertical.jpg') 0 0 no-repeat;
+        background:url('./iphone/iphone-vertical.jpg') 0 0 no-repeat;
     }
     .iphone.horizontal {
         width:480px;
         padding:34px 142px;
-        background:url('/images/iphone/iphone-horizontal.jpg') 0 0 no-repeat;
+        background:url('./iphone/iphone-horizontal.jpg') 0 0 no-repeat;
     }
 .iphone .phone {
 	position:relative;
@@ -54,7 +54,7 @@
 	min-width:320px;
 	min-height:207px;
     background:#bbb;
-    background-image:url('/images/iphone/background.png');
+    background-image:url('./iphone/background.png');
 }
 .iphone .scroll{
     width:100%;
@@ -100,7 +100,7 @@
     display:block;
     width:100%;
     height:20px;
-    background:#bbb url('/images/iphone/topbar.png') repeat-x;
+    background:#bbb url('./iphone/topbar.png') repeat-x;
 }
 .iphone .display.home .topbar {
 	color:#fff;
@@ -120,7 +120,7 @@
     color:#fff;
     text-align:center;
     text-shadow: #333 0px -1px 0px;
-    background-image:url('/images/iphone/titlebar.png');
+    background-image:url('./iphone/titlebar.png');
 }
 
 .iphone .titlebar a {  
@@ -131,7 +131,7 @@
     line-height:29px;
     top:8px;
     display:block;
-    background:url('/images/iphone/titlebar-buttons.png') 0 0 no-repeat;
+    background:url('./iphone/titlebar-buttons.png') 0 0 no-repeat;
 }
 .iphone .titlebar a em {
     display:block;
@@ -146,7 +146,7 @@
 }
 .iphone .titlebar a.back em{
     right:-8px;
-    background:url('/images/iphone/titlebar-buttons.png') 100% 0 no-repeat;
+    background:url('./iphone/titlebar-buttons.png') 100% 0 no-repeat;
 }
 
 .iphone .titlebar a:hover.back{ background-position:0 -32px }
@@ -156,12 +156,12 @@
 
     right:6px;
     padding-right:16px;   
-    background:url('/images/iphone/titlebar-buttons.png') 100% -64px no-repeat;
+    background:url('./iphone/titlebar-buttons.png') 100% -64px no-repeat;
 }
 
 .iphone .titlebar a.forward em{
     left:-8px;
-    background:url('/images/iphone/titlebar-buttons.png') 0 -64px no-repeat;
+    background:url('./iphone/titlebar-buttons.png') 0 -64px no-repeat;
 }
 
 .iphone .titlebar a:hover.forward{ background-position:100% -96px }
@@ -176,7 +176,7 @@
     position:absolute;
     bottom:0;
     left:0;
-    background:url('/images/iphone/dock.png') repeat-x 0 0;
+    background:url('./iphone/dock.png') repeat-x 0 0;
 }
 
 .iphone .dock .app{
@@ -214,7 +214,7 @@
     display: block;
     width:48px;
     height:48px;
-    background-image:url('/images/iphone/icons.png');
+    background-image:url('./iphone/icons.png');
     background-repeat:no-repeat;
 }
 .iicon .ii-refresh   {background-position:50% 0}
@@ -397,7 +397,7 @@
 	color: #fff;
     text-indent: 12px;
     text-shadow: #333 0 0 2px;
-    background: url(/images/iphone/list-header.png) left top repeat-x;
+    background: url(./iphone/list-header.png) left top repeat-x;
 }
 .iphone .list h2 {
     padding:0;
@@ -562,13 +562,13 @@
 }
 
 .imenuui li .arrow {
-	background:url(/images/iphone/arrows.png) 100% 14px no-repeat
+	background:url(./iphone/arrows.png) 100% 14px no-repeat
 }
 
 .imenuui li.active .arrow, 
 .imenuui li.showing a.arrow, 
 .imenuui li a.arrow:hover { 
-	background:url(/images/iphone/arrows.png) 100% -57px no-repeat 
+	background:url(./iphone/arrows.png) 100% -57px no-repeat 
 }
 
 .imenuui li.active a {
@@ -595,7 +595,7 @@
     height:48px;
 	padding:0;
 	margin:0;
-    background:url('/images/iphone/tabbar.png') repeat-x 0 0;
+    background:url('./iphone/tabbar.png') repeat-x 0 0;
 }
 .itabsui li {
 
@@ -660,7 +660,7 @@
     margin-left:20px;
 }
 #icursorw {
-    background:url("/images/iphone/cursorw.png") no-repeat scroll 0 0 transparent;
+    background:url("./iphone/cursorw.png") no-repeat scroll 0 0 transparent;
     height:11px;
     margin:6px 0 0 -16px;
     position:absolute;
@@ -687,7 +687,7 @@
     width:94px;
     height:26px;
 	line-height:26px;
-    background: #2472d4 url('/images/iphone/form-checkbox.png') 0 0 no-repeat;
+    background: #2472d4 url('./iphone/form-checkbox.png') 0 0 no-repeat;
 }
 .icheckboxui.off {
     background-position: 100% 0;
@@ -710,7 +710,7 @@
     width:21px;
     height:21px;
 	line-height:21px;
-    background: transparent url('/images/iphone/form-radiobutton.png') 0 0 no-repeat;
+    background: transparent url('./iphone/form-radiobutton.png') 0 0 no-repeat;
 }
 .iradiobuttonui.on {
     background-position: 100% 0;
@@ -724,7 +724,7 @@
 /*/Radiobutton*/
 /*Input Text*/
 .iinputui, .ipasswordui {
-    background:url('/images/iphone/form-input.png') 0 0 no-repeat;
+    background:url('./iphone/form-input.png') 0 0 no-repeat;
     height:32px;
     display:inline-block;
     padding-left:6px;
@@ -732,7 +732,7 @@
     
 }
 .iinputui input, .ipasswordui input{
-    background:url('/images/iphone/form-input.png') 100% 0 no-repeat;
+    background:url('./iphone/form-input.png') 100% 0 no-repeat;
     color:#333;
     font-weight: 700;
     border:0;
@@ -768,7 +768,7 @@
     height:234px;
     margin:0 17px;
     top:0;
-    background:url('/images/iphone/form-select.png') repeat-x 0 100%;    
+    background:url('./iphone/form-select.png') repeat-x 0 100%;    
 }
 
     .iselectui .ioverflow-left{
@@ -777,7 +777,7 @@
     top:0;
         height:234px;
         width:17px;    
-        background:url('/images/iphone/form-select.png') no-repeat 0 0;  
+        background:url('./iphone/form-select.png') no-repeat 0 0;  
     }
     .iselectui .ioverflow-right{
         position:absolute;
@@ -785,7 +785,7 @@
     	top:0;
         height:234px;
         width:17px;    
-        background:url('/images/iphone/form-select.png') no-repeat 100% 0;  
+        background:url('./iphone/form-select.png') no-repeat 100% 0;  
     }
 
 .iselectui .ioptions {

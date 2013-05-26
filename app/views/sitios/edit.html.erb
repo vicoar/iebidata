@@ -1,0 +1,14 @@
+<% title "Editar Sitio"%>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@sitio) do |f| %>
+  
+  <%= render :partial => "form", :locals => { :f => f, :sitio => @sitio } %>
+
+  <p>
+    <button type="submit" class="blue">Actualizar</button>
+	<%= button_link 'Cancelar', @sitio, "gray" %>
+	<%= button_link 'Volver a la Lista', sitios_path, "black" %>
+  </p>
+<% end %>

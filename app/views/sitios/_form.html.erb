@@ -1,0 +1,273 @@
+<%= mapa_editable(@sitio) %>
+
+<%= f.error_messages %>
+
+<table class="fields">
+
+	<%= f.hidden_field :muestreo_id %>
+	<%= f.hidden_field :pais_nombre %>
+	<%= f.hidden_field :region_nombre %>
+	
+	<%= f.hidden_field :longitud %>
+	<%= f.hidden_field :latitud %>
+
+	<tr class="required">
+		<td><%= f.label :muestreo_id %></td>
+		<td><%= link_to sitio.muestreo.nombre, sitio.muestreo %></td>
+	</tr>
+	
+	<tr class="required">
+        <td><%= f.label :latitud %></td>
+        <td id="latitud">
+            <%= f.text_field :latitud_grados, :size => 3 %> º
+            <%= f.text_field :latitud_minutos, :size => 2 %> '
+            <%= f.text_field :latitud_segundos, :size => 6 %> ''
+        </td>
+    </tr>
+    
+	<tr class="required">
+        <td><%= f.label :longitud %></td>
+        <td id="longitud">
+            <%= f.text_field :longitud_grados, :size => 3 %> º
+            <%= f.text_field :longitud_minutos, :size => 2 %> '
+            <%= f.text_field :longitud_segundos, :size => 6 %> ''
+        </td>
+    </tr>
+	
+	<tr class="required">
+        <td><%= f.label :ubicacion %></td>
+        <td><%= f.text_field :ubicacion %><button type="button" class="small blue visible" id="buscar">Buscar</button></td>
+    </tr>
+
+	<tr class="required">
+		<td><%= f.label :nombre %></td>
+		<td><%= f.text_field :nombre %></td>
+	</tr>
+
+	<tr>
+		<td><%= f.label :ecoregion %></td>
+		<td><%= f.text_field :ecoregion %></td>
+	</tr>
+
+	<tr class="required">
+		<td><%= f.label :fecha %></td>
+		<td><%= f.datetime_select :fecha, :start_year => (Time.now.year-100), :end_year => Time.now.year %></td>
+	</tr>
+</table>
+
+<% content_for :scripts do %>
+<script type="text/javascript" charset="utf-8">
+    function dms_to_float(campo) {
+        var dmsfloat = $(campo)
+          , grados   = parseFloat($(campo + '_grados').val())
+          , minutos  = parseFloat($(campo + '_minutos').val())
+          , segundos = parseFloat($(campo + '_segundos').val())
+          , resultado = 0
+          , isNegativeAngle = false
+          , min = -180
+          , max = 180;
+          
+          if(campo.indexOf('latitud') > 0){
+              max = 90;
+              min = -90;
+          }
+          
+          if(grados < min || grados > max){
+              alert("Grados debe tener un valor entero entre -90 y 90 para latitud o -180 y 180 para longitud");
+              return false;
+          }
+          
+          if(minutos < 0 || minutos >= 60){
+              alert("Minutos debe tener un valor entero entre 0 y 59");
+              return false;
+          }
+          
+          if(segundos < 0 || segundos >= 60){
+              alert("Segundos debe tener un valor entre 0 y 59.9999");
+              return false;
+          }
+          
+          if(grados < 0.0) {
+            isNegativeAngle = true;
+            grados = -grados;
+          }
+          
+          resultado = grados + (minutos * (1.0 / 60.0)) + (segundos * (1.0 / 3600.0));
+          
+          if (!isFinite(resultado)){
+              resultado = 0;
+          } else {
+              if(isNegativeAngle){
+                  resultado = -resultado;
+              }
+          }
+          dmsfloat.val(resultado);
+    }
+    
+    function float_to_dms(campo) {
+        var degreesTemp = parseFloat($(campo).val())
+          , grados = $(campo + '_grados')
+          , minutos = $(campo + '_minutos')
+          , segundos = $(campo + '_segundos');
+        
+        var isNegativeAngle = false;
+        if(degreesTemp < 0.0) {
+            isNegativeAngle = true;
+            degreesTemp = -degreesTemp;
+        }
+    
+        degrees     = Math.floor(degreesTemp);
+    
+        minutesTemp = degreesTemp - degrees;
+        minutesTemp = 60.0 * minutesTemp;
+        minutes     = Math.floor(minutesTemp);
+    
+        secondsTemp = minutesTemp - minutes;
+        secondsTemp = 60.0 * secondsTemp
+        seconds     = Math.round(secondsTemp * 100) / 100.0
+        
+        if(isNegativeAngle) {
+            degrees = -degrees;
+        } else {
+            degrees = degrees;
+        }
+        
+        if(!isFinite(degrees) || !isFinite(minutes) || !isFinite(seconds)) {
+            degrees = 0;
+            minutes = 0;
+            seconds = 0;
+        }
+        grados.val(degrees);
+        minutos.val(minutes);
+        segundos.val(seconds);
+    }
+
+    Gmaps.map.HandleDragend = function(pos) {
+        var geocoder = new google.maps.Geocoder();     
+        geocoder.geocode({
+            latLng: pos
+        }, function(responses) {
+            Gmaps.map.rellenarForm(pos,responses);
+        });
+    };
+    
+    Gmaps.map.geoiniciar = function(){
+        dms_to_float('#sitio_latitud');
+        dms_to_float('#sitio_longitud');
+        var lat = $('#sitio_latitud').val()
+          , lng = $('#sitio_longitud').val()
+          , ubicacion = $('#sitio_ubicacion').val();
+        if (lat == 0 && lng == 0 && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = parseFloat($('#sitio_latitud').val())
+                  , lng = parseFloat($('#sitio_longitud').val());
+                if (lat == 0 && lng == 0){
+                    lat = position.coords.latitude;
+                    lng = position.coords.longitude;
+                    var pos = new google.maps.LatLng(lat, lng);
+                    Gmaps.map.moveMarker(pos);
+                }
+            });
+        } else {
+            if (ubicacion == "") {
+                var pos = new google.maps.LatLng(lat, lng);
+                Gmaps.map.HandleDragend(pos);
+            }
+        }
+    };
+    
+    Gmaps.map.rellenarForm = function(pos,responses){
+        $("#sitio_latitud").val(pos.lat());
+        $("#sitio_longitud").val(pos.lng());
+        
+        float_to_dms('#sitio_latitud');
+        float_to_dms('#sitio_longitud');
+        
+        var pais = $('#sitio_pais_nombre')
+          , region = $('#sitio_region_nombre')
+          , ubicacion = $('#sitio_ubicacion');
+        if (responses && responses.length > 0) {
+            var i=0;
+            while(i < responses.length && ( responses[i].types.length < 2 || responses[i].types[1] != "political" ) ){
+                i++;
+            }
+            if(responses[i] && responses[i].types.length > 1 && responses[i].types[1] == "political"){
+                var destino = responses[i].formatted_address;
+                var direccion = responses[i].address_components;
+                ubicacion.val(destino);
+                for(i=0; i < direccion.length; i++){
+                    var tipo = direccion[i].types[0];
+                    var nombre = direccion[i].long_name;
+                    if(tipo == "administrative_area_level_1"){
+                        region.val(nombre);
+                    }
+                    if(tipo == "country"){
+                        pais.val(nombre);
+                    }
+                }
+                $('#buscar').attr('disabled','disabled')
+                    .addClass('gray').removeClass('blue');
+                return true;
+            }
+         }
+         alert('No se puede localizar este punto. Mueva el marcador hacia un lugar identificable.');
+         pais.val('');
+         region.val('');
+         ubicacion.val('');
+    }
+    
+    Gmaps.map.moveMarker = function(pos){
+        var marker = Gmaps.map.markers[0].serviceObject;
+        marker.setPosition(pos);
+        Gmaps.map.map.panTo(pos);
+        Gmaps.map.HandleDragend(pos);
+    }
+    
+    Gmaps.map.callback = function() {
+       if (Gmaps.map.markers_conf.draggable){
+          for (var i = 0; i <  this.markers.length; ++i) {
+             google.maps.event.addListener(Gmaps.map.markers[i].serviceObject, 'dragend', function() {
+                 Gmaps.map.HandleDragend(this.getPosition());
+             });
+          }
+          
+          Gmaps.map.geoiniciar();
+          
+          var boton = $('#buscar');
+          
+          boton.attr('disabled','disabled')
+            .addClass('gray').removeClass('blue');
+          
+          boton.click(function(e){
+             var geocoder = new google.maps.Geocoder();
+             geocoder.geocode({
+                address: $('#sitio_ubicacion').val()
+             }, function(responses){
+                 if (responses && responses.length > 0) {
+                     var pos = responses[0].geometry.location;
+                     Gmaps.map.moveMarker(pos);
+                     Gmaps.map.rellenarForm(pos,responses);
+                 } else {
+                     alert('No se puede encontrar esta ubicacion. Intente localizarlo manualmente.');
+                 }
+             });
+             return false;
+          });
+          
+          $('#sitio_ubicacion').keydown(function(){
+             boton.removeAttr('disabled')
+                .addClass('blue').removeClass('gray');
+          });
+          
+          $('#latitud input, #longitud input').change(function(){
+              dms_to_float('#sitio_latitud');
+              dms_to_float('#sitio_longitud');              
+              var lat = parseFloat($('#sitio_latitud').val())
+                , lng = parseFloat($('#sitio_longitud').val())
+                , pos = new google.maps.LatLng(lat, lng);
+              Gmaps.map.moveMarker(pos);
+          });
+       }
+    };
+</script>
+<% end %>

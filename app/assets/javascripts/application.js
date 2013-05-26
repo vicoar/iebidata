@@ -11,5 +11,14 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
+//= require rails
+//= require chromeframe
+//= require cookie-flash-rails
+//= require cookie
+//= require flash
+//= require events
 //= require_tree .
+
+

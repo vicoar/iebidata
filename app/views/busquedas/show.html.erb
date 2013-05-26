@@ -1,0 +1,32 @@
+<% title "Busqueda" %>
+
+<h1><%= yield :title %></h1>
+
+<table class="fields">
+  <tr>
+    <td>Texto:</td>
+    <td><%= @busqueda.nombre %></td>
+  </tr>
+  <tr>
+    <td>Categoria:</td>
+    <td><%= @busqueda.categoria ? @busqueda.categoria.nombre : 'Todas' %></td>
+  </tr>
+</table>
+
+<fieldset>
+  <legend>Taxones</legend>
+  <ul class="imenuui">
+    <% @busqueda.taxones.each do |taxon| %>
+      <li><%= link_to taxon.nombre, taxon %></li>
+    <% end %>
+  </ul>
+</fieldset>
+
+<fieldset>
+  <legend>Sinonimos</legend>
+  <ul class="imenuui">
+    <% @busqueda.sinonimos.each do |sinonimo| %>
+      <li><%= link_to raw("#{ h(sinonimo.nombre) } <span>#{ h(sinonimo.taxon.nombre) }</span>"), sinonimo.taxon %></li>
+    <% end %>
+  </ul>
+</fieldset>

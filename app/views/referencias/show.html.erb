@@ -1,0 +1,56 @@
+<% title "Referencia ##{@referencia.id}"%>
+
+<h1><%= yield :title %></h1>
+
+<table class="fields">
+	<tr>
+	  <td>Usuario Autor:</td>
+	  <td><%= @referencia.usuario.nombre %></td>
+	</tr>
+	<tr>
+	  <td>Taxon:</td>
+	  <td><%=link_to @referencia.taxon.nombre, @referencia.taxon %></td>
+	</tr>
+	<tr>
+	  <td>Autor:</td>
+	  <td><%= @referencia.autor %></td>
+	</tr>
+	<tr>
+	  <td>Titulo:</td>
+	  <td><%= @referencia.titulo %></td>
+	</tr>
+	<tr>
+	  <td>Fecha:</td>
+	  <td><%= @referencia.fecha %></td>
+	</tr>
+	<tr>
+	  <td>Editorial:</td>
+	  <td><%= @referencia.editorial %></td>
+	</tr>
+	<tr>
+	  <td>Revista:</td>
+	  <td><%= @referencia.revista %></td>
+	</tr>
+	<tr>
+	  <td>ISSN/ISBN:</td>
+	  <td><%= @referencia.isbn %></td>
+	</tr>
+	<tr>
+	  <td>Archivo:</td>
+	  <td><%= link_to(@referencia.archivo_file_name, @referencia.archivo.url) if @referencia.archivo? %></td>
+	</tr>
+	<tr>
+	  <td>Palabras Claves:</td>
+	  <td><%= @referencia.palabras_claves %></td>
+	</tr>
+	<tr>
+	  <td>Resumen:</td>
+	  <td><%= @referencia.resumen %></td>
+	</tr>
+</table>
+
+<p>
+	<%= button_link "Editar", edit_referencia_path(@referencia), "blue" %>
+	<%= delete_button @referencia %>
+	<%= button_link "Volver a #{@referencia.taxon.nombre}", @referencia.taxon, "rosy" %>
+</p>

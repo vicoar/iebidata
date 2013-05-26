@@ -1,0 +1,15 @@
+<% title "Editando Region"%>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@region) do |f| %>
+	
+  <%= render :partial => "form", :locals => { :f => f, :region => @region } %>
+
+  <p>
+    <button type="submit" class="blue">Actualizar</button>
+	<%= button_link 'Cancelar', @region, "gray" %>
+	<%= button_link "Volver a #{h @region.pais.nombre}", pais_path(@region.pais), "rosy" %>
+  </p>
+<% end %>
+

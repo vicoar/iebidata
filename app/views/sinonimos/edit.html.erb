@@ -1,0 +1,15 @@
+<% title "Editando Sinonimo"%>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@sinonimo) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => "form", :locals => { :f => f } %>
+  
+  <p>
+    <button type="submit" class="blue">Actualizar</button>
+	<%= button_link 'Cancelar', @sinonimo, "gray" %>
+	<%= button_link "Volver a #{@sinonimo.taxon.nombre}", @sinonimo.taxon, "rosy" %>
+  </p>
+<% end %>

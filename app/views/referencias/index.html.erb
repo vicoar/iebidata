@@ -1,0 +1,25 @@
+<% title "Lista de Referencias" %>
+
+<h1><%= yield :title %></h1>
+
+<table class="lista zebra">
+  <tr>
+    <th>Taxon</th>
+    <th>Autor</th>
+    <th>Titulo</th>
+    <th>Fecha</th>
+    <th>Editorial</th>
+  </tr>
+
+<% @referencias.each do |referencia| %>
+  <tr>
+    <td><%=h referencia.taxon.nombre %></td>
+    <td><%=h referencia.autor %></td>
+    <td><%=h referencia.titulo %></td>
+    <td><%=h referencia.fecha %></td>
+    <td><%=h referencia.editorial %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= paginate @referencias %>

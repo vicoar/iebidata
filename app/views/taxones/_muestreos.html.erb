@@ -1,0 +1,31 @@
+<% cache "taxones/#{taxon.id}/#{asoc}/p/#{page}" do 
+	case asoc
+		when "muestreos"  then items = taxon.muestreos.page(page)
+		when "muestras"   then items = taxon.muestras.page(page)
+		else items = taxon.ejemplares.page(page)
+	end
+%> 
+	
+		<br class="clear" />
+		
+		<div class="dp30" id="listaMuestras">
+			<ul class="imenuui">
+				<% items.each do |item| %>
+					<li><%= link_to item.nombre, item %></li>
+				<% end %>
+			</ul>
+		</div>
+		
+		<div class="dp70" id="muestreo">
+			&nbsp;
+		</div>
+		
+		<br class="clear" />
+		
+		<% if items %>
+			<%= paginate items %>
+		<% end %>
+		
+		<p><%= button_link("Agregar Ejemplar", new_taxon_ejemplar_path(taxon), "orange") if asoc == "ejemplares" %></p>
+
+<% end %>

@@ -361,7 +361,7 @@ button, .button {
 
 /* Breadcrumbs */
 #breadcrumb {
-    background-image:url('/images/breadcrumb/bc_bg.png'); 
+    background-image:url('./breadcrumb/bc_bg.png'); 
     background-repeat:repeat;
     /*height:30px;*/
     line-height:30px;
@@ -382,7 +382,7 @@ button, .button {
 	#breadcrumb a,#breadcrumb span {
 		height:30px;
 		display:block;
-        background-image:url('/images/breadcrumb/bc_separator.png'); 
+        background-image:url('./breadcrumb/bc_separator.png'); 
 		background-repeat:no-repeat; 
 		background-position:right;
 		padding-right: 15px;
@@ -458,7 +458,7 @@ button, .button {
     color: #AAA; }
   .apple_pagination em {
     font-weight: bold;
-    background: transparent url('images/apple-circle.gif') no-repeat 50% 50%; }
+    background: transparent url('./images/apple-circle.gif') no-repeat 50% 50%; }
   .apple_pagination a {
     text-decoration: none;
     color: black; }
@@ -539,7 +539,7 @@ body {
 	/* Heading kerning pairs and ligatures */
 	text-rendering: optimizeLegibility;
 	
-	background:url('/images/bg-sueno.jpg') no-repeat scroll center top #fcfded;
+	background:url('./bg-sueno.jpg') no-repeat scroll center top #fcfded;
 	font-family:  "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitsream Vera Sans", "Trebuchet MS", Trebuchet, Verdana, "Verdana Ref", sans-serif;
 	/* font-family: "Gill Sans MT", GillSans, Calibri, Trebuchet, sans-serif !important; */
 	/* font-family: Verdana, "Bitstream Vera Sans", "DejaVu Sans", "Bitsream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif; */
@@ -771,7 +771,7 @@ table.lista tr.resaltado {
 			
 			.ui-autocomplete-loading {
 			  /* color #fffde8 extraido de input.focus */
-              background: url('/images/ui-anim_basic_16x16.gif') no-repeat scroll right center #FFFDE8 !important;
+              background: url('./ui-anim_basic_16x16.gif') no-repeat scroll right center #FFFDE8 !important;
 			}
 	
 	
@@ -826,7 +826,7 @@ table.lista tr.resaltado {
 		position:absolute;
 		list-style:none;
 		margin:0 0 0 -15px;
-        background-image:url('/images/breadcrumb/bc_bg.png'); 
+        background-image:url('./breadcrumb/bc_bg.png'); 
 		padding:0;
 		visibility:hidden;
 	}
@@ -836,7 +836,7 @@ table.lista tr.resaltado {
 	
 		#breadcrumb li ul li {
 			float:none;
-            background-image:url('/images/breadcrumb/bc_bg.png'); 
+            background-image:url('./breadcrumb/bc_bg.png'); 
 		}
 		
 		#breadcrumb li ul li a {
@@ -848,13 +848,13 @@ table.lista tr.resaltado {
 	}
 	
 	.placeholder {
-      background:url('/images/placeholder400x400.jpg');
+      background:url('./placeholder400x400.jpg');
 	  width:400px;
 	  height:400px;
 	}
     
     .placeholder.min {
-      background:url('/images/placeholder150x150.jpg');
+      background:url('./placeholder150x150.jpg');
       width:150px;
       height:150px;
     }
@@ -916,7 +916,7 @@ table.lista tr.resaltado {
 			}
 		
 		.imenuui li a.loading {
-			background:url('/images/ui-anim_basic_16x16.gif') no-repeat scroll 98% 14px transparent;
+			background:url('./ui-anim_basic_16x16.gif') no-repeat scroll 98% 14px transparent;
 		}
 		
 		.imenuui li.visible {

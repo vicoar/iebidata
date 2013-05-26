@@ -1,0 +1,43 @@
+<% title "Panel de Administración"%>
+
+<h1><%= yield :title %></h1>
+
+<div class="dp33">
+	<div class="column">
+		<fieldset>
+			<legend>Localizacion</legend>
+			<ul>
+				<li><%= link_to "Paises", paises_path %></li>
+				<li><%= link_to "Regiones", regiones_path %></li>
+			</ul>
+		</fieldset>
+	</div>
+</div>
+
+<div class="dp33">	
+	<div class="column">
+		<fieldset>
+			<legend>Usuarios y Roles</legend>
+			<ul>
+				<li><%= link_to "Usuarios", usuarios_path %></li>
+				<li><%= link_to "Invitaciones", invitaciones_path %></li>
+			</ul>
+		</fieldset>
+	</div>
+	
+</div>
+
+<div class="dp33">	
+	<div class="column">
+		<fieldset>
+			<legend>Categorias Taxonomicas</legend>
+			<ul>
+				<li><%= link_to "Categorias", categorias_path %></li>
+			</ul>
+		</fieldset>
+	</div>
+	
+</div>
+
+<br class="clear" />
+

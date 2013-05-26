@@ -1,0 +1,13 @@
+<% title "Nueva Referencia" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@referencia, :html => { :multipart => true }) do |f| %>
+  
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  
+  <p>
+  	<button type="submit" class="green">Crear</button>
+	<%= button_link "Volver a #{@referencia.taxon.nombre}", @referencia.taxon, "black" %>
+  </p>
+<% end %>

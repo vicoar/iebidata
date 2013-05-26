@@ -1,0 +1,75 @@
+<% if @taxon %>
+	<% title "Nueva imagen para Taxon #{@taxon.nombre}" %>
+<% else %>
+	<% title "Nueva imagen para Clave #{@clave.id}" %>
+<% end %>
+
+<h1><%= yield :title %></h1>
+
+<div id="instrucciones" class="resaltado hidden">
+	<h2>Consejos de uso:</h2>
+		
+	<h3>Instrucciones:</h3>
+	<ol>
+		<li>Haga clic en "Agregar archivos" busque las imagen que desea cargar, seleccionela y presione "Aceptar". Repita este paso tantas veces como necesite.</li>
+		<li>Al extremo derecho de cada fila hay un boton rojo que permite eliminar la imagen de la cola de subida. Esta opcion NUNCA elimina la imagen de su computadora.</li>
+		<li>Presione el boton "Comenzar subida" (en inglés "Start upload"). Al lado de la columna estado el tilde verde significa que la imagen se proceso exitosamente.</li>
+		<li>Espere que todas las imagenes terminen de subirse, al finalizar se le preguntara si quiere volver al taxon o clave.</li>
+	</ol>
+	
+	<h3>Consideraciones</h3>	
+	<h4>Sobre las imagenes a cargar:</h4>
+	<ul>
+		<li><b>Puedes seleccionar mas de una imagen a la vez</b>, mantega presionado SHIFT para seleccionar imagenes contiguas o CTRL para imagenes sueltas.</li>
+		<li><b>No es necesario reducir las imagenes</b>, las imagenes se reducen y comprimen automaticamente antes de enviarlas, ahorrando tiempo de carga y ancho de banda</li>
+		<li><b>No agrege la marca de agua</b>, el sistema la agrega automaticamente</li>
+	</ul>
+	
+	<h4>Sobre el cargador</h4>
+	<ul>
+		<li><b>No cierre esta pestaña durante la carga</b>, esto provocaria una cancelacion de la carga</li>
+		<li><b>No importa el orden en que se cargan las imagenes</b>, existe la opcion de reordenar las imagenes nuevas y las anteriores en todo momento.</li>
+		<li><b>El tiempo de carga depende de su velocidad de conexion y la cantidad de imagenes seleccionadas</b>, el proceso puede tardar varios minutos.</li>
+	</ul>
+	
+	<h4>¿Tiene problemas?</h4>
+	<p>Si existen problemas proceda como se indica a continuacion</p>
+	<ul>
+		<li>Revise que su conexion tiene la velocidad necesaria</li>
+		<li>Si el problema persiste intente cargar la pagina nuevamente presionando F5 o el boton Recargar/Refrescar en su navegador</li>
+		<li>Contacte al administrador explicando como provocar el problema</li>
+	</ul>
+	
+	
+</div>
+
+<%= form_for(@imagen, :url => imagenes_path, :html => { :multipart => true }) do |f| %>
+		
+	<div class="row hidden">
+		<%= f.hidden_field :album_id %>
+		<%= f.hidden_field :album_type %>
+	</div>
+	
+	<div class="row">
+		<%= f.label :comentario %><br />
+		<%= f.text_area :comentario %>
+	</div>
+	
+	<div class="row">
+		<%= f.label :imagen %><br />
+		<%= f.file_field :imagen %>
+	</div>
+
+  <p>
+    <button type="submit" class="green visible">Subir imagen</button>
+	<%= button_link 'Volver a la Lista', imagenes_path, "black" %>
+  </p>
+<% end %>
+
+<p id="link">
+	<% if @taxon %>
+		<%= button_link "Volver al Taxon #{@taxon.nombre}", taxon_path(@taxon), "rosy" %>	
+	<% else %>
+		<%= button_link "Volver a Clave #{@clave.id}", clave_path(@clave), "rosy" %>
+	<% end %>
+</p>

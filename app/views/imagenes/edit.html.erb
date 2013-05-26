@@ -1,0 +1,22 @@
+<% title "Editando Imagen" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@imagen) do |f| %>
+
+  <%= image_tag @imagen.url, :'max-width' => '100%' %>
+ 
+  <hr />
+ 
+  <%= f.error_messages %>
+	
+  <p>
+    <%= f.label :comentario %><br />
+    <%= f.text_area :comentario %>
+  </p>
+  
+  <p>
+    <button type="submit" class="blue">Actualizar</button>
+    <%= button_link 'Cancelar', @imagen, "gray" %>
+  </p>
+<% end %>

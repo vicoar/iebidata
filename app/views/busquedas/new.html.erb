@@ -1,0 +1,33 @@
+<% title "Nueva Busqueda" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for @busqueda do |f| %>
+  <%= f.error_messages %>
+  
+  <table class="fields">
+    <tr class="required">
+      <td>
+        <%= f.label :nombre %>
+      </td>
+      <td>
+        <%= f.text_field :nombre %>
+      </td>
+    </tr>
+    <tr class="required">
+      <td>
+        <%= f.label :categoria_id %>
+      </td>
+      <td>
+       <%= f.select :categoria_id,
+	   options_from_collection_for_select( Categoria.all, :id, :nombre, Categoria.final.id ) %>
+      </td>
+    </tr>
+  </table>
+    
+  <p>
+    <button type="submit" class="green visible">Buscar</button>
+  </p>
+<% end %>
+
+

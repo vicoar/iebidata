@@ -9,5 +9,18 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
- */
+
+ *= require reset
+ *= require grid
+ *= require type
+ *= require plugins/gadgets
+ *= require plugins/percent-grid
+ *= require dropdown
+ *= require default.advanced
+ *= require default
+ *= require jquery-ui
+ *= require iphone
+ *= require plupload.queue
+ *= require styles
+ *= require gmaps4rails
+*/

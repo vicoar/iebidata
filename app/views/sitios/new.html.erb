@@ -1,0 +1,21 @@
+<% title "Nuevo Sitio"%>
+
+<h1><%= yield :title %></h1>
+
+<div class="resaltado">
+	<h2>Instrucciones</h2>
+	<ol>
+		<li>Mueva el marcador del mapa hacia la localizacion de la muestra. Puede hacer zoom con los botones + y - arriba a la derecha del mapa.</li>
+		<li>El sistema intentara detectar automaticamente la localizacion. Si no se detecta ingrese el pais y region manualmente.</li>
+	</ol>
+</div>
+
+<%= form_for(@sitio) do |f| %>
+  
+  <%= render :partial => "form", :locals => { :f => f, :sitio => @sitio } %>
+
+  <p>
+    <button type="submit" class="green">Crear</button>
+	<%= button_link "Volver a #{@sitio.muestreo.nombre}", @muestreo, "rosy" %>
+  </p>
+<% end %>

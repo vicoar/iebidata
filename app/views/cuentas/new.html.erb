@@ -1,0 +1,17 @@
+<%= title "Registracion de Usuario" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@usuario, :url => { :action => 'create' }) do |f| %>
+  
+  <fieldset>
+      <legend>Crear nueva cuenta</legend>
+          <%= f.hidden_field :invitacion_pase %>
+	  <%= render :partial => "form", :locals => { :f => f }%>
+	  
+	  <p>
+	  	<button type="submit" class="green visible">Crear cuenta</button>
+		<%= button_link "Cancelar", cuenta_path, "black" %>
+	  </p>
+  </fieldset>
+<% end %>

@@ -1,0 +1,91 @@
+	<%= f.error_messages %>
+
+  <table class="fields">
+  	<tr>
+  		<th colspan="2">Muestreo, Sitio y Muestra</th>	
+	</tr>
+	
+  	<tr class="required">
+  		<td><%= f.label :muestreo_id %></td>
+		<td><%= f.collection_select :muestreo_id, Muestreo.all, :id, :nombre, :include_blank => true %></td>
+  	</tr>
+	
+	<tr class="required">
+  		<td><%= f.label :sitio_id %></td>
+		<td id="select_sitio">
+			<% if ejemplar.sitio %>
+				<%= f.collection_select :sitio_id, ejemplar.muestreo.sitios, :id, :nombre %>
+			<% else %>
+				Seleccione el Muestreo para continuar
+			<% end %>
+		</td>
+  	</tr>
+
+  	<tr class="required">
+  		<td><%= f.label :muestra_id %></td>
+		<td id="select_muestra">
+			<% if ejemplar.sitio %>
+				<%= f.collection_select :muestra_id, ejemplar.sitio.muestras, :id, :nombre %>
+			<% else %>
+				Seleccione el Muestra para continuar
+			<% end %>
+		</td>
+  	</tr>
+	
+	<tr>
+  		<th colspan="2">Especie/Morfo</th>	
+	</tr>
+	
+	<tr class="required">
+	  <td><%= f.label :taxon_id,"Especie" %></td>
+	  <td><%= f.collection_select :taxon_id, Taxon.finales.all, :id, :nombre %></td>
+	</tr>
+	
+	<tr>
+  		<th colspan="2">Coleccion</th>	
+	</tr>
+	
+	<tr class="required">
+	  <td><%= f.label :coleccion_id %></td>
+	  <td><%= f.collection_select :coleccion_id, Coleccion.all, :id, :numero_y_nombre %></td>
+	</tr>
+	
+	<tr>
+	  <td><%= f.label :numero_coleccion,"Nro. Coleccion" %></td>
+	  <td>
+		<span id="coleccion_numero">000</span> - 
+		<%= f.text_field :numero_coleccion, :size => 5 %>
+		<%= f.text_field :subindice, :size => 2 %>
+	  </td>
+	</tr>
+	
+	<tr>
+  		<th colspan="2">Cantidades</th>	
+	</tr>
+	
+	<tr class="required">
+	  <td><%= f.label :machos %></td>
+	  <td><%= f.text_field :machos %></td>
+	</tr>
+	
+	<tr class="required">
+	  <td><%= f.label :hembras %></td>
+	  <td><%= f.text_field :hembras %></td>
+	</tr>
+	
+	<tr class="required">
+	  <td><%= f.label :inmaduros %></td>
+	  <td><%= f.text_field :inmaduros %></td>
+	</tr>
+	
+	<tr class="required">
+	  <td><%= f.label :indeterminados %></td>
+	  <td><%= f.text_field :indeterminados %></td>
+	</tr>
+	
+	<tr class="required">
+	  <td><%= f.label :total %></td>
+	  <td id="ejemplar_total">0</td>
+	</tr>
+	
+  </table>

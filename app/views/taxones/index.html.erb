@@ -1,0 +1,30 @@
+<% 
+if @categoria
+  title "Lista de #{ @categoria.nombre.pluralize }"
+else
+  title "Lista de Raices"
+end
+cache "categorias/#{ @categoria ? @categoria.id : 0 }/p/#{@page}" do %>
+	
+	<%= raw breadcrums() %>
+	
+	<h1><%= yield :title %></h1>
+	
+	
+	<ul class="imenuui">
+		<% @taxones.each do |taxon| %>
+			<li class="<%= taxon.visible ? 'visible' : 'novisible' %>">
+			    <%= link_to taxon.nombre, taxon %>
+			</li>
+		<% end %>
+	</ul>
+	
+	<br />
+	
+	<%= button_link("Nuevo Taxon", new_taxon_path, "green") unless @categoria %>
+	
+	<br />
+	
+	<%= paginate @taxones %>
+
+<% end %>

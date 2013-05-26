@@ -10,37 +10,35 @@ var js = {
   , simpleviewer : base + "simpleviewer/simpleviewer.swf"
 }
 
-/********************** FLASH **********************/
-head.js(js.cookie, function(){
-	$(function(){
-		Flash.transferFromCookies();
-		Flash.writeDataTo('notice', $('#flash .notice'));
-		Flash.writeDataTo('alert', $('#flash .error'));
-		
-	    $('#flash .ver').slideDown();
-	    $('#flash div .close').click(function(){
-			$('#flash .ver').slideUp();
-			return false;
-	    });
-		
-		var botones = $('button, .button').filter(':hidden');
-		var tipo = Cookie.get("usuario_tipo");
-		
-		if (tipo == "administrador"){
-			botones.addClass('visible');
-			$('.admin').show();
-		}
-		if (tipo == "administrador" || tipo == "autor"){
-			botones.filter(':not(.red)').addClass('visible');
-			$('.autor').show();
-		}
-		// se ejecuta lo mismo otra vez porque jquery una vez capturados 
-		// los elementos no los actualiza automaticamente
-		$('button, .button').filter(':hidden').remove();
-	});
-});
 
-$(function(){	
+$(function(){
+
+	/********************** FLASH **********************/
+	Flash.transferFromCookies();
+	Flash.writeDataTo('notice', $('#flash .notice'));
+	Flash.writeDataTo('alert', $('#flash .error'));
+	
+    $('#flash .ver').slideDown();
+    $('#flash div .close').click(function(){
+		$('#flash .ver').slideUp();
+		return false;
+    });
+	
+	var botones = $('button, .button').filter(':hidden');
+	var tipo = Cookie.get("usuario_tipo");
+	
+	if (tipo == "administrador"){
+		botones.addClass('visible');
+		$('.admin').show();
+	}
+	if (tipo == "administrador" || tipo == "autor"){
+		botones.filter(':not(.red)').addClass('visible');
+		$('.autor').show();
+	}
+	// se ejecuta lo mismo otra vez porque jquery una vez capturados 
+	// los elementos no los actualiza automaticamente
+	$('button, .button').filter(':hidden').remove();
+
 	
 	/******************** BUSCADOR ********************/
 	$('#busqueda_nombre').bind('focus change',function(){
@@ -223,8 +221,7 @@ $(function(){
 					
 					$('#muestreo').html(contenido);
 					$('#muestreo').find('.button:not(.mas)').remove();
-										
-					head.js(js.gmap);
+					
 					galeria();
 				},
 				error:function(data){
@@ -263,7 +260,7 @@ $(function(){
 		})
 	});
 	
-	$('#ejemplar_sitio_id').live('change',function(){
+	$('#ejemplar_sitio_id').on('change',function(){
 		var id = $(this).val();
 		var sel = $('#select_muestra');
 		sel.addClass('loading').empty();
@@ -326,19 +323,17 @@ $(function(){
 	});
 	
 	if($('#ordenable').length > 0){
-		head.js(js.jqueryui, function(){
-			$('#ordenable').sortable({
-				revert: true,
-				update: function(event, ui) {
-					var ids = "";					  
-					$('#ordenable div').each(function(){
-						ids = ids + $(this).data('imagen-id') + ",";
-					});
-					$('#orden').val(ids);
-				}
-			});
-			$("#ordenable").disableSelection();
+		$('#ordenable').sortable({
+			revert: true,
+			update: function(event, ui) {
+				var ids = "";					  
+				$('#ordenable div').each(function(){
+					ids = ids + $(this).data('imagen-id') + ",";
+				});
+				$('#orden').val(ids);
+			}
 		});
+		$("#ordenable").disableSelection();
 	}
 	
 	/*********************** CLAVE **********************/
@@ -349,7 +344,7 @@ $(function(){
 		return false; 
 	});
 	
-	$('#opciones .eliminar').live('click', function(){
+	$('#opciones .eliminar').on('click', function(){
 		var opc = $(this).parents('tr');
 		opc.remove();
 		return false; 
@@ -470,61 +465,58 @@ function cargador(id){
 	  , tipoAlbum = $('#imagen_album_type').val();
 	multiples = (tipoAlbum == "Taxon");
 	
-	head.js(baseplu + "plupload.full.js", baseplu + "plupload.es.js"
-  	 , baseplu + "jquery.plupload.queue.js"
-	   , function(){
-	   	$('#instrucciones').removeClass('hidden');
-		
-		$(id).pluploadQueue({
-			// General settings
-			runtimes : 'flash,silverlight',
-			url : "/imagenes/ajax_upload",
-			// max_file_size : '2mb',
-			filters : [
-				{title : "Imagen JPEG", extensions : "jpg"},
-				{title : "Otros formatos de Imagen", extensions : "gif,png"}
-			],
-			multipart: true,  
-			multipart_params: {  
-		    "authenticity_token" : $('meta[name="csrf-token"]').attr('content'),
-				"album_id":  $('#new_imagen #imagen_album_id').val(),
-				"album_type":$('#new_imagen #imagen_album_type').val()
-		   	},
-			
-			// Si es clave evito que seleccione varios archivos
-			multi_selection: multiples,
+
+   	$('#instrucciones').removeClass('hidden');
 	
-			// Resize images on client side if we can
-			// El tamaño es un poco mayor al que se usa porque PLUpload pixela los bordes
-			// al cambiar de tamaño, por ello se vuelve a cambiar el tamaño en el servidor
-			resize : {width : 1200, height : 900, quality : 80},
-	
-			// Flash & Silverlight settings
-			flash_swf_url : baseplu + 'plupload.flash.swf',
-			silverlight_xap_url : baseplu + 'plupload.silverlight.xap'
-		});
+	$(id).pluploadQueue({
+		// General settings
+		runtimes : 'flash,silverlight',
+		url : "/imagenes/ajax_upload",
+		// max_file_size : '2mb',
+		filters : [
+			{title : "Imagen JPEG", extensions : "jpg"},
+			{title : "Otros formatos de Imagen", extensions : "gif,png"}
+		],
+		multipart: true,  
+		multipart_params: {  
+	    "authenticity_token" : $('meta[name="csrf-token"]').attr('content'),
+			"album_id":  $('#new_imagen #imagen_album_id').val(),
+			"album_type":$('#new_imagen #imagen_album_type').val()
+	   	},
 		
-		var uploader = $(id).pluploadQueue();
-		
-		uploader.bind('UploadComplete', function() {
-			var texto = $('#link a').text();
-			if( confirm('Carga finalizada: ' + texto + '?') ){
-				var link = $('#link a').attr('href');
-				window.location = link;
-			}	
-			preguntar = false;	
-	  	});
-		
-		//Si es para una clave envia el archivo apenas se lo selecciono
-		if(!multiples){
-			uploader.bind('FilesAdded', function(up, files) {
-		        if(uploader.state!=2 & files.length>0){
-		        	uploader.start();
-		        }
-			});
-		}
-		
+		// Si es clave evito que seleccione varios archivos
+		multi_selection: multiples,
+
+		// Resize images on client side if we can
+		// El tamaño es un poco mayor al que se usa porque PLUpload pixela los bordes
+		// al cambiar de tamaño, por ello se vuelve a cambiar el tamaño en el servidor
+		resize : {width : 1200, height : 900, quality : 80},
+
+		// Flash & Silverlight settings
+		flash_swf_url : baseplu + 'plupload.flash.swf',
+		silverlight_xap_url : baseplu + 'plupload.silverlight.xap'
 	});
+	
+	var uploader = $(id).pluploadQueue();
+	
+	uploader.bind('UploadComplete', function() {
+		var texto = $('#link a').text();
+		if( confirm('Carga finalizada: ' + texto + '?') ){
+			var link = $('#link a').attr('href');
+			window.location = link;
+		}	
+		preguntar = false;	
+  	});
+	
+	//Si es para una clave envia el archivo apenas se lo selecciono
+	if(!multiples){
+		uploader.bind('FilesAdded', function(up, files) {
+	        if(uploader.state!=2 & files.length>0){
+	        	uploader.start();
+	        }
+		});
+	}
+	
 }
 
 
@@ -534,21 +526,18 @@ function cargador(id){
 
 function galeria(){	
 	if ($('#galeria').length > 0) {
-		head.js(js.swfobject, function(){
+		var back = "eeeeee"			
+		var gal = $('#galeria'), ancho = gal.closest('fieldset').innerWidth(), alto = ancho * 3 / 4;			
+		var docXml = $('#galeriaXml').val() + ".xml";
 		
-			var back = "eeeeee"			
-			var gal = $('#galeria'), ancho = gal.closest('fieldset').innerWidth(), alto = ancho * 3 / 4;			
-			var docXml = $('#galeriaXml').val() + ".xml";
-			
-			var flashvars = {};
-			flashvars.galleryURL = docXml;
-			var params = {};
-			params.allowfullscreen = true;
-			params.allowscriptaccess = "always";
-			params.bgcolor = back;
-			swfobject.embedSWF( js.simpleviewer, "galeria", "100%", alto, "9.0.124", false, flashvars, params );
-			
-		});
+		var flashvars = {};
+		flashvars.galleryURL = docXml;
+		var params = {};
+		params.allowfullscreen = true;
+		params.allowscriptaccess = "always";
+		params.bgcolor = back;
+		swfobject.embedSWF( js.simpleviewer, "galeria", "100%", alto, "9.0.124", false, flashvars, params );
+		
 	}
 }
 
@@ -570,69 +559,67 @@ function autocompletar(selector, categoria, callback){
 	var campo = $(selector)
 	  , fk = $(selector + "_id")
 	  , categoria = $(categoria);
-	  
-	head.js(js.jqueryui, function(){
-		// Para el error de escape de HTML en la etiquetas:
-		// http://www.arctickiwi.com/blog/jquery-autocomplete-labels-escape-html-tags
-		$[ "ui" ][ "autocomplete" ].prototype["_renderItem"] = function( ul, item) {
-			return $( "<li></li>" ) 
-			    .data( "item.autocomplete", item )
-			    .append( $( "<a></a>" ).html( item.label ) )
-			    .appendTo( ul );
-		};
-	    
-	    
-		campo.autocomplete({
-			minLength: 2,
-			delay: 50,
-			search: function(event, ui){
-				if (!callback) {
-					fk.val('');
-				}
-			},
-			source: function(request, response){
-				var cadena = request.term
-				  , categoria_id = categoria.val()
-				  , items = false;
-				
-				if(categoria_id == ""){
-					categoria_id = 0;
-				}
-				
-				/* Cache: matriz [categoria,cadena] en forma de objetos */
-				if (categoria in cache) {
-					if (cadena in cache[categoria]) {
-						items = cache[categoria][cadena];
-					}
-				}
-				else {
-					cache[categoria] = new Object;
-				}
-				
-				if (items) {
-					response(items);
-				}
-				else {
-					$.getJSON("/categorias/" + categoria_id + "/autocompletar_taxon/" + cadena + ".json", function(data){
-						items = new Array;
-						for (var i = 0; i < data.length; i++) {
-							taxon = data[i].taxon;
-							resaltado = __highlight(taxon.nombre, cadena);
-							items[i] = {
-								label: resaltado,
-								value: taxon.nombre,
-								id: taxon.id
-							}
-						}						
-						cache[categoria][cadena] = items;
-						response(items);
-					});
-				}
-			},
-			select: function(event, ui){
-				callback(event,ui);
+	
+	// Para el error de escape de HTML en la etiquetas:
+	// http://www.arctickiwi.com/blog/jquery-autocomplete-labels-escape-html-tags
+	$[ "ui" ][ "autocomplete" ].prototype["_renderItem"] = function( ul, item) {
+		return $( "<li></li>" ) 
+		    .data( "item.autocomplete", item )
+		    .append( $( "<a></a>" ).html( item.label ) )
+		    .appendTo( ul );
+	};
+    
+    
+	campo.autocomplete({
+		minLength: 2,
+		delay: 50,
+		search: function(event, ui){
+			if (!callback) {
+				fk.val('');
 			}
-		});
+		},
+		source: function(request, response){
+			var cadena = request.term
+			  , categoria_id = categoria.val()
+			  , items = false;
+			
+			if(categoria_id == ""){
+				categoria_id = 0;
+			}
+			
+			/* Cache: matriz [categoria,cadena] en forma de objetos */
+			if (categoria in cache) {
+				if (cadena in cache[categoria]) {
+					items = cache[categoria][cadena];
+				}
+			}
+			else {
+				cache[categoria] = new Object;
+			}
+			
+			if (items) {
+				response(items);
+			}
+			else {
+				$.getJSON("/categorias/" + categoria_id + "/autocompletar_taxon/" + cadena + ".json", function(data){
+					items = new Array;
+					for (var i = 0; i < data.length; i++) {
+						taxon = data[i].taxon;
+						resaltado = __highlight(taxon.nombre, cadena);
+						items[i] = {
+							label: resaltado,
+							value: taxon.nombre,
+							id: taxon.id
+						}
+					}						
+					cache[categoria][cadena] = items;
+					response(items);
+				});
+			}
+		},
+		select: function(event, ui){
+			callback(event,ui);
+		}
 	});
 }
 

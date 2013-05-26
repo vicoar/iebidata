@@ -1,0 +1,20 @@
+	<%= f.error_messages %>
+	
+	<table class="fields">
+		<tr class="required">
+		    <td><%= f.label :nivel %></td>
+		    <td><%= f.select :nivel, nivel_sel %></td>
+		</tr>
+		<tr class="required">
+		    <td><%= f.label :subnivel %></td>
+		    <td><%= f.select :subnivel, subnivel_sel %>
+		</tr>
+		<tr class="required">
+		    <td><%= f.label :nombre %></td>
+		    <td><%= f.text_field :nombre %></td>
+		</tr>
+		<tr>
+		    <td><%= f.label :descripcion %></td>
+		    <td><%= f.text_area :descripcion %></td>
+		</tr>
+	</table>

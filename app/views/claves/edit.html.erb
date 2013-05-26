@@ -1,0 +1,15 @@
+<% title "Editando Clave" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@clave, :url => clave_path(@clave)) do |f| %>
+
+   <%= render :partial => 'form', :locals => {:f => f, :clave => @clave} %>
+ 
+  <p>
+    <button type="submit" class="blue">Actualizar</button>
+	<%= button_link 'Cancelar', clave_path(@clave), 'rosy' %>
+	<%= button_link 'Volver a Lista', claves_path, 'black' %>
+  </p>
+<% end %>
+

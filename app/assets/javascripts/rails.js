@@ -111,7 +111,7 @@
 		return missing;
 	}
 
-	$('a[data-confirm], a[data-method], a[data-remote]').live('click.rails', function(e) {
+	$('a[data-confirm], a[data-method], a[data-remote]').on('click.rails', function(e) {
 		var link = $(this);
 		if (!allowAction(link)) return false;
 
@@ -124,7 +124,7 @@
 		}
 	});
 
-	$('form').live('submit.rails', function(e) {
+	$('form').on('submit.rails', function(e) {
 		var form = $(this), remote = form.data('remote') != undefined;
 		if (!allowAction(form)) return false;
 
@@ -140,7 +140,7 @@
 		}
 	});
 
-	$('form input[type=submit], form button[type=submit], form button:not([type])').live('click.rails', function() {
+	$('form input[type=submit], form button[type=submit], form button:not([type])').on('click.rails', function() {
 		var button = $(this);
 		if (!allowAction(button)) return false;
 		// register the pressed submit button
@@ -148,11 +148,11 @@
 		button.closest('form').data('ujs:submit-button', data);
 	});
 
-	$('form').live('ajax:beforeSend.rails', function(event) {
+	$('form').on('ajax:beforeSend.rails', function(event) {
 		if (this == event.target) disableFormElements($(this));
 	});
 
-	$('form').live('ajax:complete.rails', function(event) {
+	$('form').on('ajax:complete.rails', function(event) {
 		if (this == event.target) enableFormElements($(this));
 	});
 })( jQuery );

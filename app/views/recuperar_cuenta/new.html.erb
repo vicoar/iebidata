@@ -1,0 +1,17 @@
+<% title "Recuperar cuenta"%>
+
+<h1><%= yield :title %></h1>
+
+<p>Por favor ingrese su direccion de email abajo y presione el boton Recuperar Cuenta.</p>
+
+<% form_tag recuperar_cuenta_index_path do %>
+  <table class="fields">
+    <tr>
+      <td><%= label_tag :email %></td>
+      <td><%= text_field_tag :email %></td>
+    </tr>
+  </table>
+  <p>
+    <button type="submit" class="green visible">Recuperar Cuenta</button>
+  </p>
+<% end %>

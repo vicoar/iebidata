@@ -1,0 +1,33 @@
+<% title "Invitaciones solicitadas" %>
+
+<h1><%= yield :title %></h1>
+
+<div class="resaltado">
+  <h2>&nbsp;</h2>
+  <p>Las solicitudes rechazadas no seran notificadas al solicitante.</p>
+</div>
+
+<table class="zebra">
+  <tr>
+    <th>Nombre</th>
+    <th>E-Mail</th>
+    <th>Invitar</th>
+    <th>Rechazar</th>
+  </tr>
+
+  <% @invitaciones.each do |invitacion| %>
+    <tr>
+      <td><%= invitacion.nombre %></td>
+      <td><%= invitacion.destinatario_email %></td>
+      <td><%= link_to "enviar invitacion", enviar_invitacion_path(invitacion), :method => :post %></td>
+      <td><%= link_to "rechazar solicitud", invitacion, :confirm => 'Esta seguro?', :method => :delete %></td>
+    </tr>
+  <% end %>
+
+</table>
+
+<%= paginate @invitaciones %>
+
+<p>
+<%= button_link "Invitar", new_invitacion_path, "green" %>
+</p>

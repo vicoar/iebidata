@@ -1,0 +1,23 @@
+<% title "Modificar Contraseña"%>
+
+<h1><%= yield :title %></h1>
+
+<p>Por favor ingresa tu nueva contrase&ntilde;a abajo y repitela, luego presiona "Actualizar Contrase&ntilde;a".</p>
+
+<% form_tag recuperar_cuenta_path, :method => :put do %>
+  <%= error_messages_for @usuario %>
+  <table class="fields">
+    <tr>
+      <td><%= label_tag :password,'Contraseña' %></td>
+      <td><%= password_field_tag :password %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag :password_confirmation, 'Repira la Contraseña' %></td>
+      <td><%= password_field_tag :password_confirmation %></td>
+    </tr>
+  </table>
+  
+  <p>
+    <button type="submit" class="blue visible">Actualizar Contraseña</button>
+  </p>
+<% end %>

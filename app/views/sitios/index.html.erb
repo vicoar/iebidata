@@ -1,0 +1,27 @@
+<% title "Lista de Sitios"%>
+
+<h1><%= yield :title %></h1>
+
+<table class="lista zebra">
+  <tr>
+	<th>Nombre</th>
+	<th>Muestreo</th>
+	<th>Fecha</th>
+    <th>Ecoregion</th>
+    <th>Ubicacion</th>
+  </tr>
+
+<% @sitios.each do |sitio| %>
+  <tr>
+	<td><%= link_to sitio.nombre, sitio %></td>
+	<td><%= sitio.muestreo.nombre %></td>
+	<td><%= sitio.fecha %></td>
+    <td><%= sitio.ecoregion %></td>
+    <td><%= sitio.ubicacion %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= paginate @sitios %>

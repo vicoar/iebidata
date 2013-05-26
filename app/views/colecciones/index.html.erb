@@ -1,0 +1,26 @@
+<% title "Lista de Colecciones" %>
+
+<h1><%= yield :title %></h1>
+
+
+<table class="lista zebra">
+  <tr>
+  	<th>Numero</th>
+    <th>Nombre</th>
+  </tr>
+
+<% @colecciones.each do |coleccion| %>
+  <tr>
+  	<td><%=link_to h(coleccion.numero), coleccion %></td>
+    <td><%= coleccion.nombre %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= paginate @colecciones %>
+
+<br />
+
+<%= button_link 'Nueva Coleccion', new_coleccion_path, 'green' %>

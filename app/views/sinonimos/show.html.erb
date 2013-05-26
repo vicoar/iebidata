@@ -1,0 +1,41 @@
+<% title "Sinonimo: #{@sinonimo.nombre}"%>
+
+<h1><%= yield :title %></h1>
+
+<table class="fields">
+	<tr>
+		<td>Autor:</td>
+		<td><%=h @sinonimo.usuario.nombre %></td>
+	</tr>
+	<tr>
+		<td>Taxon:</td>
+		<td><%=link_to h(@sinonimo.taxon.nombre), @sinonimo.nombre %></td>
+	</tr>
+	<tr>
+		<td>Nombre:</td>
+		<td><%=h @sinonimo.nombre %></td>
+	</tr>
+	<tr>
+		<td>Comentario:</td>
+		<td><%=h @sinonimo.comentario %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+
+
+<p>
+	<%= button_link 'Editar', edit_sinonimo_path(@sinonimo), "blue" %>
+	<%= delete_button @sinonimo %>
+	<%= button_link "Volver a #{@sinonimo.taxon.nombre}", @sinonimo.taxon, "rosy" %>
+</p>

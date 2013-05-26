@@ -1,0 +1,15 @@
+<% title "Editar Ejemplar" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@ejemplar) do |f| %>
+
+  <%= render :partial => "form", :locals => { :f => f, :ejemplar => @ejemplar } %>
+  
+  <p>
+	<button type="submit" class="blue">Actualizar</button>
+	<%= button_link "Cancelar", @ejemplar, "black" %>
+	<%= button_link "Volver a Muestra #{@ejemplar.muestra.nombre}", @ejemplar.muestra, "rosy" %>
+  </p>
+  
+<% end %>

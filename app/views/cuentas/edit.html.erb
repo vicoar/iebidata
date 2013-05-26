@@ -1,0 +1,15 @@
+<%= title "Editar Cuenta" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@usuario, :url => { :action => "update" }) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => "form", :locals => { :f => f } %>
+  
+  <p>
+  	<button type="submit" class="blue visible">Actualizar</button>
+	<%= button_link "Cancelar", cuenta_path, "gray" %>
+	
+  </p>
+<% end %>

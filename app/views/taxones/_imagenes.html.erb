@@ -1,0 +1,16 @@
+<% cache "taxones/#{taxon.id}/imagenes" do %>
+  
+  <% if taxon.imagenes.count == 0 %>
+    <p>No hay imagenes</p>
+  <% else %>
+    <%= hidden_field_tag "galeriaXml", galeria_taxon_path(taxon) %>    
+    <div id="galeria">SimpleViewer requiere JavaScript y Flash Player. <a href="http://get.adobe.com/flashplayer/">Descargar Flash</a></div>
+  <% end %>
+  
+  <p>
+    <%= button_link "Agregar Imagen", new_taxon_imagen_path(taxon), "orange" %>
+    <!-- button_link "Lista de Imagenes", taxon_imagenes_path(taxon), "pink" -->
+    <%= button_link "Reordenar Imagenes de #{taxon.nombre}", lista_taxon_imagenes_path(taxon), "blue" %>
+  </p>
+  
+<% end %>

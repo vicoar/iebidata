@@ -1,0 +1,14 @@
+<%= title "Editar Usuario" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@usuario) do |f| %>
+
+  <%= render :partial => "form", :locals => { :f => f } %>
+  
+  <p>
+  	<button type="submit" class="blue visible">Actualizar</button>
+	<%= button_link "Cancelar", @usuario, "gray" %>
+	<%= button_link "Volver a Lista", usuarios_path, "black" %>	
+  </p>
+<% end %>

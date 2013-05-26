@@ -1,0 +1,66 @@
+<% title "Ejemplar: #{@ejemplar.nombre}" %>
+
+<h1><%= yield :title %></h1>
+
+<% cache "ejemplares/#{@ejemplar.id}/show" do %>
+
+<table class="fields">	
+	<tr>
+	  <td>Autor:</td>
+	  <td><%=h @ejemplar.usuario.nombre %></td>
+	</tr>
+	<tr>
+	  <td>Nombre:</td>
+	  <td><%=h @ejemplar.nombre %></td>
+	</tr>
+	
+	<tr>
+	  <td>Coleccion:</td>
+	  <td><%=link_to @ejemplar.coleccion.nombre, @ejemplar.coleccion %></td>
+	</tr>
+	
+	<tr>
+	  <td>Muestra:</td>
+	  <td><%=link_to @ejemplar.muestra.nombre, @ejemplar.muestra %></td>
+	</tr>
+	
+	<tr>
+	  <td>Taxon:</td>
+	  <td><%=link_to @ejemplar.taxon.nombre, @ejemplar.taxon %></td>
+	</tr>
+	
+	<tr>
+	  <td>Machos:</td>
+	  <td><%= @ejemplar.machos %></td>
+	</tr>
+	
+	<tr>
+	  <td>Hembras:</td>
+	  <td><%= @ejemplar.hembras %></td>
+	</tr>
+	
+	<tr>
+	  <td>Inmaduros:</td>
+	  <td><%= @ejemplar.inmaduros %></td>
+	</tr>
+	
+	<tr>
+	  <td>Indeterminados:</td>
+	  <td><%= @ejemplar.indeterminados %></td>
+	</tr>
+	
+	<tr>
+	  <td>Total:</td>
+	  <td><%= @ejemplar.total %></td>
+	</tr>
+</table>
+
+<p>
+	<%= button_link "Editar", edit_ejemplar_path(@ejemplar), "blue" %>
+	<%= delete_button @ejemplar %>
+	<%= button_link "Volver a Muestra #{@ejemplar.muestra.nombre}", @ejemplar.muestra, "rosy" %>
+	<%= button_link "Volver a #{@ejemplar.taxon.nombre}", @ejemplar.taxon, "rosy" %>
+	<%= button_link 'Ver ficha para impresion', ficha_ejemplar_path(@ejemplar), 'orange' %>
+</p>
+
+<% end %>

@@ -1,0 +1,20 @@
+<% title "Editando Taxon"%>
+
+<%=raw breadcrums(@taxon) %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@taxon) do |f| %>
+
+  <%= render :partial => "form", :locals => { :f => f, :taxon => @taxon } %>
+  
+  <p>
+  	<button type="submit" class="blue">Actualizar</button>
+    <%= button_link 'Cancelar', @taxon, "gray" %>
+	<% if @taxon.parent %>
+		<%= button_link "Volver a #{@taxon.parent.nombre}", @taxon.parent, "rosy" %>
+	<% else %>
+		<%= button_link "Volver a Lista", taxones_path, "black" %>
+	<% end %>
+  </p>
+<% end %>

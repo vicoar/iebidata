@@ -1,0 +1,14 @@
+<h1>IEBIData: Invitacion</h1>
+
+<p>
+  Hola. Me alegro informarte que estas invitado a formar parte del proyecto IEBIData.
+  Solo debes hacer clic en el siguiente enlace y completar un breve formulario.
+</p>
+
+<p>
+  <%= link_to "Inscribirme", inscribir_url(@invitacion.pase) %>
+</p>
+
+<p>Muchas Gracias</p>
+
+<p>-- <%= @invitacion.remitente ? @invitacion.remitente.nombre : 'IEBIData' %></p>

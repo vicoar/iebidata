@@ -1,0 +1,33 @@
+<% title "Reordenar imagenes para #{@taxon.nombre}" %>
+
+<h1><%= yield :title %></h1>
+
+<div class="resaltado">
+	<h2>Instrucciones para cambiar el orden de las imagenes</h2>
+	<ol>
+		<li>Ud. esta viendo todas las imagenes asociada a <b><%= @taxon.nombre %></b>. Las imagenes estan ordenadas en el sentido de lectura (de izquierda a derecha y de arriba hacia abajo).</li>
+		<li>Haga clic en la imagen que desee y arrastrela hacia la posicion que debe ocupar. El resto de las imagenes se acomodaran automaticamente.</li>
+		<li>Una vez logrado el orden deseado haga clic en el boton "Guardar cambios" al final de esta pagina.</li>
+	</ol>
+</div>
+
+<div id="ordenable" class="lista-imagenes">
+	<% @imagenes.each do |imagen| %>
+		<div data-imagen-id="<%= imagen.id %>">
+			<%= image_tag(imagen.url(:min))%>
+		</div>
+	<% end %>
+</div>
+
+<% form_tag({:action => "ordenar"},{:method => "put"}) do %>
+	<%= hidden_field_tag "orden" %>
+	<%= hidden_field_tag "taxon", @taxon.id %>
+	
+	<% if @imagenes.length > 0 %>
+		<p>
+			<button type="submit" class="blue">Guardar cambios</button>
+			<%= button_link "Volver a #{@imagenes.first.album_type}", album_path(@imagenes.first), "rosy" %>
+		</p>
+	<% end %>
+
+<% end %>

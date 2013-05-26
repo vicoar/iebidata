@@ -1,0 +1,25 @@
+<%= f.error_messages %>
+
+  <table class="fields">
+  	<tr class="required">
+  		<td><%= f.label :nombre, "Nombre y Apellido" %></td>
+		<td><%= f.text_field :nombre %></td>
+  	</tr>
+  	<tr class="required">
+  		<td><%= f.label :email %></td>
+		<td><%= f.text_field :email%></td>
+  	</tr>
+	<tr class="required">
+  		<td><%= f.label :password, "Contraseña" %></td>
+		<td><%= f.password_field :password %></td>
+  	</tr>
+	<tr class="required">
+  		<td><%= f.label :password_confirmation, "Repetir Contraseña" %></td>
+		<td><%= f.password_field :password_confirmation %></td>
+  	</tr>
+	<tr class="required">
+  		<td><%= f.label :tipo %></td>
+		<td><%= f.collection_select :tipo, Usuario::ROLES, :to_s, :humanize %></td>
+  	</tr>
+	
+  </table>

@@ -1,0 +1,98 @@
+<% title "Muestra: #{@muestra.nombre}" %>
+
+<h1><%= yield :title %></h1>
+
+<br class="clear" />
+
+<% cache "muestras/#{@muestra.id}/show" do %>
+
+<table class="fields">	
+	<tr>
+	  <td>Autor:</td>
+	  <td><%= @muestra.usuario.nombre %></td>
+	</tr>
+	
+	<tr>
+	  <td>Sitio:</td>
+	  <td><%=link_to @muestra.sitio.nombre, @muestra.sitio %></td>
+	</tr>
+	
+	<tr>
+	  <td>Numero:</td>
+	  <td><%= @muestra.nombre %></td>
+	</tr>
+	
+	<tr>
+		<td>Colector:</td>
+		<td><%= @muestra.colector ? @muestra.colector.nombre : '-' %></td>
+	</tr>
+	
+	<tr>
+		<td>Identificador:</td>
+		<td><%= @muestra.identificador ? @muestra.identificador.nombre : '-' %></td>
+	</tr>
+	
+	<tr>
+		<td>Habitat:</td>
+		<td><%= @muestra.habitat %></td>
+	</tr>
+	
+	<tr>
+		<td>Deposito:</td>
+		<td><%= @muestra.deposito %></td>
+	</tr>
+	
+	<tr>
+		<td>Estado:</td>
+		<td><%= @muestra.estado %></td>
+	</tr>
+	
+	<tr>
+		<td>Comentario:</td>
+		<td><%= @muestra.comentario %></td>
+	</tr>
+</table>
+
+<p>
+	<%= button_link "Editar", edit_muestra_path(@muestra), "blue" %>
+	<%= delete_button @muestra %>
+	<%= button_link "Volver a Sitio #{@muestra.sitio.id}", @muestra.sitio, "rosy" %>
+</p>
+
+<% end %>
+
+<% cache "muestras/#{@muestra.id}/ejemplares" do %>
+
+<fieldset>
+	<legend>Ejemplares</legend>
+
+	<table class="lista zebra">
+		<tr class="cabecera">
+			<th>Nombre</th>
+			<th>Especie/Morfo</th>
+			<th>Machos</th>
+			<th>Hembras</th>
+			<th>Inmaduros</th>
+			<th>Indeterminados</th>
+			<th>Total</th>
+		</tr>
+		<% @muestra.ejemplares.each do |ejemplar| %>
+			<tr>
+				<td><%= link_to ejemplar.nombre, ejemplar %></td>
+				<td><%= ejemplar.taxon.nombre %></td>
+				<td><%= ejemplar.machos %></td>
+				<td><%= ejemplar.hembras %></td>
+				<td><%= ejemplar.inmaduros %></td>
+				<td><%= ejemplar.indeterminados %></td>
+				<td><%= ejemplar.total %></td>
+			</tr>
+		<% end %>
+	</table>
+	
+	<p>
+		<%= button_link "Agregar Ejemplar", new_muestra_ejemplar_path(@muestra), "orange" %>
+	</p>
+
+</fieldset>
+
+<% end %>

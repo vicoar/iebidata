@@ -1,0 +1,21 @@
+<% title "Lista de Sinonimos"%>
+
+<h1><%= yield :title %></h1>
+
+<table class="lista zebra">
+  <tr>
+    <th>Nombre</th>
+	<th>Taxon</th>
+    <th>Comentario</th>
+  </tr>
+
+	<% @sinonimos.each do |sinonimo| %>
+	  <tr>
+	    <td><%=link_to h(sinonimo.nombre), sinonimo %></td>
+		<td><%=h sinonimo.taxon.nombre %></td>
+	    <td><%=h sinonimo.comentario %></td>
+	  </tr>
+	<% end %>
+</table>
+
+<%= paginate @sinonimos %>

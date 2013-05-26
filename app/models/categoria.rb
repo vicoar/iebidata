@@ -3,6 +3,19 @@ class Categoria < ActiveRecord::Base
   default_scope :order => 'nivel, subnivel'
   
   
+  has_many :taxones,
+    :class_name => "Taxon",
+    :order => :nombre
+  
+  has_many :sinonimos,
+    :through => :taxones
+  
+  has_many :busquedas,
+    :dependent => :delete_all
+    
+  belongs_to :usuario
+  
+  
   validates_presence_of :usuario_id, :nombre
   
   validates_uniqueness_of :nombre,

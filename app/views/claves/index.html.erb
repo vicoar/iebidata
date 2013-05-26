@@ -1,0 +1,13 @@
+<% title "Lista de Claves" %>
+
+<h1><%= yield :title %></h1>
+
+<ul>
+<% @claves.each do |clave| %>
+	<li><%=link_to h(clave.dilema), clave_path(clave) %></li>
+<% end %>
+</ul>
+
+<br />
+
+<%= button_link 'Nueva Clave', new_clave_path, 'green' %>

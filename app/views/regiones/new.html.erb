@@ -1,0 +1,13 @@
+<% title "Nueva Region"%>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@region) do |f| %>
+
+  <%= render :partial => "form", :locals => { :f => f, :region => @region } %>
+  
+  <p>
+    <button type="submit" class="green">Crear</button>
+    <%= button_link "Volver a #{@region.pais.nombre}", @region.pais, "rosy" %>
+  </p>
+<% end %>

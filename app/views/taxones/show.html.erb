@@ -1,0 +1,108 @@
+<% title "#{@taxon.categoria.nombre} #{ @taxon.nombre }" %>
+
+<% cache "taxones/#{@taxon.id}/show" do %>
+	<%= raw breadcrums(@taxon) %>
+	
+	<h1><%= yield :title %></h1>
+	
+	<div id="datos">
+		
+	<div class="dp100">
+		<fieldset>
+			<legend>Detalles</legend>
+			<table class="fields">
+				<tr>
+					<td>Autor:</td>
+					<td><%=h @taxon.usuario.nombre %></td>
+				</tr>
+				<tr>
+					<td>Descripcion:</td>
+					<td><%=h @taxon.descripcion %></td>
+				</tr>
+			</table>
+			<p>
+				<%= button_link 'Editar', edit_taxon_path(@taxon), "blue" %>
+				<%= delete_button @taxon %>
+			</p>
+		</fieldset>	
+	</div>
+<% end %>
+
+<div class="dp50">
+	<fieldset>
+		<legend>Sinonimos</legend>
+		<% cache "taxones/#{@taxon.id}/sinonimos" do %>
+			<ul>
+				<% @taxon.sinonimos.limit(5).each do |sinonimo| %>
+					<li><%= link_to sinonimo.nombre, sinonimo %></li>
+				<% end %>
+			</ul>			
+		<% end %>
+		<%= button_link "Lista de Sinonimos", taxon_sinonimos_path(@taxon), "pink" %>
+		<%= button_link "Agregar Sinonimo", new_taxon_sinonimo_path(@taxon), "orange" %>
+	</fieldset>
+	
+</div>
+
+<div class="dp50">
+	<fieldset>
+		<legend>Referencias Bibliograficas</legend>
+		<% cache "taxones/#{@taxon.id}/referencias" do %>
+			<ul>
+				<% @taxon.referencias.limit(5).each do |referencia| %>
+					<li><%= link_to referencia.nombre, referencia %></li>
+				<% end %>
+			</ul>
+		<% end %>
+		<%= button_link "Lista de Referencias", taxon_referencias_path(@taxon), "pink" %>
+		<%= button_link "Agregar Referencia", new_taxon_referencia_path(@taxon), "orange" %>
+	</fieldset>
+</div>
+	
+<br class="clear" />
+</div><!-- #datos -->
+
+<br class="clear" />
+
+<% if @taxon.categoria.final? %>
+	<fieldset>
+		<legend>Mas informacion</legend>
+		
+		<div id="muestreos" class="ui-tabs ui-widget-content ui-corner-all">
+			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+				<li class="ui-state-default ui-corner-top <%= "ui-tabs-selected  ui-state-active" if @asoc == "ejemplares" %>">
+					<%= link_to "Ejemplares", :asoc => "ejemplares" %>
+				</li>
+				<li class="ui-state-default ui-corner-top <%= "ui-tabs-selected  ui-state-active" if @asoc == "muestras" %>">
+					<%= link_to "Muestras",   :asoc => "muestras" %>
+				</li>
+				<li class="ui-state-default ui-corner-top  <%= "ui-tabs-selected  ui-state-active" if @asoc == "muestreos" %>">
+					<%= link_to "Muestreos",  :asoc => "muestreos" %>	
+				</li>
+				<li class="ui-state-default ui-corner-top  <%= "ui-tabs-selected  ui-state-active" if @asoc == "imagenes" %>">
+					<%= link_to "Imagenes",  :asoc => "imagenes" %>	
+				</li>
+				<li class="ui-state-default ui-corner-top <%= "ui-tabs-selected  ui-state-active" if @asoc == "mapa" %>">
+					<%= link_to "Mapa de Distribucion", :asoc => "mapa" %>
+				</li>
+			</ul>
+			
+			<div class="ui-tabs-panel ui-corner-bottom">
+				<% case @asoc %>
+				<% when "mapa" then %>
+					<%= render :partial => "mapa", :locals => { :taxon => @taxon, :page => @page }%>
+				<% when "imagenes" then %>
+					<%= render :partial => "imagenes", :locals => { :taxon => @taxon }%>
+				<% else %>
+					<%= render :partial => "muestreos", :locals => { :taxon => @taxon, :asoc => @asoc, :page => @page } %>
+				<% end %>
+			</div>
+		</div>
+	</fieldset>
+<% else %>
+	<fieldset>
+		<legend>Subcategorias</legend>
+		<%= render :partial => "hijos", :locals => { :taxon => @taxon, :subcatSelecId => @subcatSelecId, :page => @page } %>
+	</fieldset>
+<% end %>
+

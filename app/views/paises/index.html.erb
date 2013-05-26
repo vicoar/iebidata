@@ -1,0 +1,30 @@
+<% title "Lista de Paises"%>
+
+<h1><%= yield :title %></h1>
+
+<table class="lista zebra">
+  <tr>
+    <th>Nombre</th>
+    <th>Nombre ingles</th>
+    <th>Capital</th>
+    <th>Continente</th>
+  </tr>
+  
+<% @paises.each do |pais| %>
+  <tr>
+    <td><%=link_to pais.nombre, pais_path(pais) %></td>
+    <td><%= pais.nombre_ingles %></td>
+    <td><%= pais.capital %></td>
+    <td><%= pais.continente %></td>
+  </tr>
+<% end %>
+
+</table>
+
+<br />
+
+<%= paginate @paises %>
+
+<br />
+
+<%= button_link 'Nuevo Pais', new_pais_path, "green" %>

@@ -1,0 +1,37 @@
+<%= title "Reportar un error" %>
+
+<h1><%= yield :title %></h1>
+
+<div class="resaltado">
+	<h2>Instrucciones</h2>
+	<p>Ningun software es perfecto, por lo tanto este lugar sirve para reportar posibles errores.</p>
+	<ul>
+		<li>Sea conciso, describa los pasos en forma clara que intento hacer y los pasos siguio para reproducir el error.</li>
+		<li>Copie y pegue el mensaje del error.</li>
+		<li>Agrege comentarios adicionales como el dia/hora, su nombre u otros datos que considere necesarios.</li>
+	</ul>	
+</div>
+
+<%= form_tag :action => 'error' %>
+	
+	<table class="fields">
+		<tr class="required">
+			<td><%= label :error, :pasos, 'Pasos para reproducir el error' %></td>
+			<td><%= text_area :error, :pasos %></td>
+		</tr>
+		
+		<tr class="required">
+			<td><%= label :error, :mensaje, 'Mensaje del error' %></td>
+			<td><%= text_area :error, :mensaje %></td>
+		</tr>
+		
+		<tr class="required">
+			<td><%= label :error, :comentario, 'Comentarios adicionales' %></td>
+			<td><%= text_area :error, :comentario %></td>
+		</tr>
+	</table>
+	
+	<p>
+		<button type="submit" class="green visible">Reportar error</button>
+	</p>	
+</form>

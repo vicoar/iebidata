@@ -1,0 +1,35 @@
+<% title "Usuario: #{@usuario.nombre}" %>
+
+<h1><%= yield :title %></h1>
+
+<table class="fields">
+	<tr>
+		<td>Nombre:</td>
+		<td><%=h @usuario.nombre%></td>
+	</tr>
+	<tr>
+		<td>E Mail:</td>
+		<td><%=h @usuario.email%></td>
+	</tr>
+	<tr>
+		<td>Registracion:</td>
+		<td><%=h @usuario.created_at %></td>
+	</tr>
+	<tr>
+		<td>Tipo:</td>
+		<td><%=h @usuario.tipo %></td>
+	</tr>
+</table>
+
+<p>
+	<%= button_link "Editar", edit_usuario_path(@usuario), "blue" %>
+	<%= delete_button @usuario %>
+	<%= button_link "Volver a Lista", usuarios_path, "black" %>
+</p>
+
+<div class="resaltado">
+	<h2>Advertencia</h2>
+	<p>Cualquier usuario que haya trabajo sobre el sistema ingresando informacion <i>¡no podra ser borrado!</i>.
+		Esto es una medida de seguridad para mantener la coherencia de los datos.</p>
+	<p>Si por razones de fuerza mayor necesita borrar el usuario contactese con el administrador del sistema.</p>
+</div>

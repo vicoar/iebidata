@@ -1,0 +1,14 @@
+  <%= f.error_messages %>
+  
+  <%= f.hidden_field :taxon_id %>
+  
+  <table class="fields">
+  	<tr class="required">
+  		<td><%= f.label :nombre %></td>
+		<td><%= f.text_field :nombre %></td>
+  	</tr>
+	<tr>
+  		<td><%= f.label :comentario %></td>
+		<td><%= f.text_area :comentario %></td>
+  	</tr>
+  </table>

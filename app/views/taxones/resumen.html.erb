@@ -1,0 +1,14 @@
+<fieldset>
+	<legend><%= @taxon.nombre %></legend>
+	
+	<% if @taxon.imagenes.count == 0 %>
+		<p>No hay imagenes</p>
+	<% else %>
+		<%= hidden_field_tag "galeriaXml", galeria_taxon_path(@taxon) %>		
+		<div id="galeria">SimpleViewer requiere JavaScript y Flash Player. <a href="http://get.adobe.com/flashplayer/">Descargar Flash</a></div>
+	<% end %>
+	
+	<br class="clear" />
+	
+	<%= button_link "Ver mas", @taxon, "gray" %>
+</fieldset>

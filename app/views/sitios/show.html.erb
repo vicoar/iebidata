@@ -1,0 +1,104 @@
+<% title "Sitio: #{@sitio.nombre}" %>
+
+<h1><%= yield :title %></h1>
+
+<br class="clear" />
+
+<% cache "sitios/#{@sitio.id}/show" do %>
+
+<table class="fields">	
+	<tr>
+	  <td>Autor:</td>
+	  <td><%= @sitio.usuario.nombre %></td>
+	</tr>
+
+	<tr>
+	  <td>Nombre:</td>
+	  <td><%= @sitio.nombre %></td>
+	</tr>
+	
+	<tr>
+	  <td>Muestreo:</td>
+	  <td><%=link_to @sitio.muestreo.nombre, @sitio.muestreo %></td>
+	</tr>
+	
+	<tr>
+	  <td>Pais:</td>
+	  <td><%= @sitio.pais.nombre %></td>
+	</tr>
+	
+	<tr>
+	  <td>Region:</td>
+	  <td><%= @sitio.region.nombre %></td>
+	</tr>	
+
+	<tr>
+	  <td>Fecha:</td>
+	  <td><%= @sitio.fecha %></td>
+	</tr>
+	
+	<tr>
+	  <td>Ecoregion:</td>
+	  <td><%= @sitio.ecoregion %></td>
+	</tr>
+	
+	<tr>
+      <td>Latitud:</td>
+      <td><%= @sitio.latitud_grados %> º <%= @sitio.latitud_minutos %> ' <%= @sitio.latitud_segundos %> ''</td>
+    </tr>
+    
+    <tr>
+      <td>Longitud:</td>
+      <td><%= @sitio.longitud_grados %> º <%= @sitio.longitud_minutos %> ' <%= @sitio.longitud_segundos %> ''</td>
+    </tr>
+	
+    <tr>
+      <td>Ubicacion:</td>
+      <td><%= @sitio.ubicacion %></td>
+    </tr>
+</table>
+
+<br />
+
+<p>
+	<%= button_link "Editar", edit_sitio_path(@sitio), "blue" %>
+	<%= delete_button @sitio %>
+	<%= button_link "Volver a #{@sitio.muestreo.nombre}", @sitio.muestreo, "rosy" %>
+</p>
+
+<hr />
+
+<% end %>
+
+<%= mapa(@sitio) %>
+
+<br />
+
+<% cache "sitios/#{@sitio.id}/muestras" do %>
+
+<fieldset>
+	<legend>Muestras</legend>
+
+	<table class="lista zebra">
+		<tr class="cabecera">
+			<th>Nombre</th>
+			<th>Habitat</th>
+			<th>Deposito</th>
+			<th>Estado</th>
+		</tr>
+		<% @sitio.muestras.each do |muestra| %>
+			<tr>
+				<td><%= link_to muestra.nombre, muestra %></td>
+				<td><%= muestra.habitat %></td>
+				<td><%= muestra.deposito %></td>
+				<td><%= muestra.estado %></td>
+		<% end %>
+	</table>
+	
+	<p>
+		<%= button_link "Agregar Muestra", new_sitio_muestra_path(@sitio), "orange" %>
+	</p>
+
+</fieldset>
+
+<% end %>

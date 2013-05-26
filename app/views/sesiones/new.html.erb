@@ -1,0 +1,67 @@
+<%= title "Inicio de Sesion" %>
+
+<h1><%= yield :title %></h1>
+
+<div class="dp50">
+	<%= form_for @sesion, :url => sesiones_path do |f| %>
+		<fieldset>
+		  <legend>Ingresar</legend>
+		  
+		  <p>Si ya tienes cuenta, ingresa</p>
+		  
+		  <%= f.error_messages %>
+		  
+		  <table class="fields">
+		  	<tr>
+		  		<td><%= f.label :email,'E-Mail' %></td>
+				<td><%= f.text_field :email %></td>
+		  	</tr>
+			<tr>
+		  		<td><%= f.label :password,'Contraseña' %></td>
+				<td><%= f.password_field :password %></td>
+		  	</tr>
+			<tr>
+		  		<td><%= f.label :remember_me,'Recordarme (por un mes)' %></td>
+				<td><%= f.check_box :remember_me %></td>
+		  	</tr>
+		  </table>
+		  
+		  <p>
+		  	<button type="submit" class="green visible">Ingresar</button>
+			<%= button_link "Olvide mi contraseña", new_recuperar_cuenta_path, "blue visible" %>
+		  </p>
+		
+		</fieldset>
+   <% end %>
+</div>
+
+<div class="dp50">
+		
+	<div class="resaltado">
+	  <h2>Aviso:</h2>
+	  <p>Este sistema es cerrado, para inscribirte debes tener una invitacion.
+	  Puedes solicitar una completando con tus datos personales.</p>
+	</div>
+	
+	<fieldset>
+		<legend>Solicitar invitacion</legend>
+		
+		<%= form_for Invitacion.new do |f| %>
+		  <table class="fields">
+		    <tr>
+		      <td><%= f.label :nombre, 'Nombre y Apellido' %></td>
+		      <td><%= f.text_field :nombre %></td>
+		    </tr>
+		    <tr>
+		      <td><%= f.label :destinatario_email, 'E-Mail' %></td>
+		      <td><%= f.text_field :destinatario_email %></td>
+		    </tr>
+		  </table>
+		  <p>
+		  	<button type="submit" class="green visible">Enviar solicitud</button>
+		  </p>
+		<% end %>
+	</fieldset>
+</div>
+
+<br class="clear" />

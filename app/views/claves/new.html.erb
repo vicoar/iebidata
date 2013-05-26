@@ -1,0 +1,13 @@
+<% title "Nueva Clave" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@clave) do |f| %>
+  
+  <%= render :partial => 'form', :locals => {:f => f, :clave => @clave} %>
+  
+  <p>
+    <button type="submit" class="green">Crear</button>
+	<%= button_link "Volver a Lista", claves_path, "black" %>
+  </p>
+<% end %>

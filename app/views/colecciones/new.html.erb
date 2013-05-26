@@ -1,0 +1,13 @@
+<% title "Nueva Coleccion" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@coleccion, :url => colecciones_path) do |f| %>
+	
+	<%= render :partial => "form", :locals => {:f => f} %>
+  
+	<p>
+		<button type="submit" class="green">Crear Coleccion</button>
+		<%= button_link 'Volver a Lista de Colecciones', colecciones_path, "black" %>
+	</p>
+<% end %>

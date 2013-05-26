@@ -1,0 +1,13 @@
+  	<%= f.error_messages %>
+	
+	<table class="fields">
+		<tr class="required">
+			<td><%= f.label :nombre %></td>
+			<td><%= f.text_field :nombre %></td>
+		</tr>
+		
+		<tr class="required">
+			<td><%= f.label :fecha %></td>
+			<td><%= f.datetime_select :fecha, :start_year => Time.now.year - 100, :end_year => Time.now.year %></td>
+		</tr>
+	</table>

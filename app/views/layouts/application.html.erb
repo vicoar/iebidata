@@ -14,19 +14,14 @@
 	<meta http-equiv="imagetoolbar" content="no">
 	
 	<title><%= yield :title %> - IEBIData</title>
-		
-	<%= stylesheet_link_tag "reset", "grid", "type", "plugins/gadgets", "plugins/percent-grid", 
-		"dropdown", "default.advanced", "default",
-		"jquery-ui", "iphone", "plupload.queue", "styles.css", 
-		:media => "all" %>
+
+	<%= stylesheet_link_tag "application" %>
 	
-	 <!--[if lte IE 6]>
-	 <link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="screen, projection">
-	 <![endif]-->
+	<!--[if lte IE 6]>
+	<%= stylesheet_link_tag "ie", :media => "screen, projection"%>
+	<![endif]-->
 	 
-	 <%= stylesheet_link_tag "print", :media => "print" %>
-	 
-	 <%= yield :head %><!-- gmaps4rails -->
+	<%= stylesheet_link_tag "print", :media => "print" %>
 	
 </head>
 
@@ -123,14 +118,10 @@
 	<h2>Copyright (c) 2011</h2> 
 </div>
 
-<%= javascript_include_tag "head.load.min.js" %>
+<%= javascript_include_tag "application" %>
 
-<script type="text/javascript">
-	head.js(
-	   {jquery: "http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"},
-	   {eventos: "<%= javascript_path "events.js" %>"}
-	)
-</script>
+<!-- gmaps4rails -->
+<%= yield :scripts %>
 
 <script type="text/javascript">
   if (document.location.host.indexOf(':3000') < 0){
@@ -146,8 +137,6 @@
       })();
   }
 </script>
-
-<%= yield :scripts %><!-- gmaps4rails -->
 
 </body>
 </html>

@@ -1,0 +1,50 @@
+<%= f.error_messages %>
+
+<%= f.hidden_field :sitio_id %>
+
+<table class="fields">
+	<tr class="required">
+		<td><%= f.label :muestreo_id %>:</td>
+		<td><%= link_to muestra.muestreo.nombre, muestra.muestreo %></td>
+	</tr>
+
+	<tr class="required">
+		<td><%= f.label :sitio_id %>:</td>
+		<td><%= link_to muestra.sitio.nombre, muestra.sitio %></td>
+	</tr>
+	
+	<tr class="required">
+		<td><%= f.label :nombre, 'Numero' %>:</td>
+		<td id="muestra_nombre"><%= f.text_field :nombre %></td>
+	</tr>
+	
+	<tr class="required">
+		<td><%= f.label :colector_id, "Colector" %>:</td>
+		<td><%= f.collection_select :colector_id, Usuario.editores.all, :id, :nombre %></td>
+	</tr>
+	
+	<tr class="required">
+		<td><%= f.label :identificador_id, "Identificador" %>:</td>
+		<td><%= f.collection_select :identificador_id, Usuario.editores.all, :id, :nombre %></td>
+	</tr>
+	
+	<tr>
+		<td><%= f.label :habitat %>:</td>
+		<td><%= f.text_field :habitat %></td>
+	</tr>
+	
+	<tr>
+		<td><%= f.label :deposito %>:</td>
+		<td><%= f.text_field :deposito %></td>
+	</tr>
+	
+	<tr>
+		<td><%= f.label :estado %>:</td>
+		<td><%= f.text_field :estado %></td>
+	</tr>
+	
+	<tr>
+		<td><%= f.label :comentario %>:</td>
+		<td><%= f.text_area :comentario %></td>
+	</tr>
+</table>

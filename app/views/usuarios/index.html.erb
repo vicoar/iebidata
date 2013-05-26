@@ -1,0 +1,19 @@
+<% title "Lista de Usuarios" %>
+
+<h1><%= yield :title %></h1>
+
+<table class="lista zebra">
+  <tr>
+    <th>Nombre</th>
+	<th>E Mail</th>
+	<th>Tipo</th>
+  </tr>
+
+<% @usuarios.each do |usuario| %>
+  <tr>
+    <td><%=link_to h(usuario.nombre), usuario %></td>
+	<td><%=h usuario.email %></td>
+	<td><%=h usuario.tipo %></td>
+  </tr>
+<% end %>
+</table>

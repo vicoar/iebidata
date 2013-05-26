@@ -1,0 +1,38 @@
+<%= title "Mi cuenta" %>
+
+<h1><%= yield :title %></h1>
+
+<div class="dp50">
+	<fieldset>
+		<legend>Salir</legend>
+		
+		<p>¿Desea abandonar el sistema?</p>
+		
+		<%= button_link "Salir", logout_path, "red visible"%>
+	</fieldset>
+</div>
+
+<div class="dp50">
+	<fieldset>
+		<legend>Tus Datos</legend>
+		<table class="fields">
+			<tr>
+				<td>Nombre:</td>
+				<td><%= @usuario.nombre %></td>
+			</tr>
+			<tr>
+				<td>E-mail:</td>
+				<td><%= @usuario.email %></td>
+			</tr>
+			
+			<tr>
+				<td>Nivel:</td>
+				<td><%= @usuario.tipo %></td>
+			</tr>
+		</table>
+		
+		<%= button_link "Actualizar datos / Cambiar contraseña", edit_cuenta_path, "blue visible" %>
+	</fieldset>
+</div>
+
+<br class="clear" />

@@ -1,0 +1,13 @@
+<%= title "Crear Usuario" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@usuario) do |f| %>
+  
+  <%= render :partial => "form", :locals => { :f => f }%>
+  
+  <p>
+  	<button type="submit" class="green visible">Crear</button>
+	<%= button_link "Cancelar", usuarios_path, "black" %>
+  </p>
+<% end %>

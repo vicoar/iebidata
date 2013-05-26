@@ -1,0 +1,19 @@
+<% title "Nueva Muestra" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@muestra) do |f| %>
+  
+  <%= render :partial => "form", :locals => { :f => f, :muestra => @muestra } %>
+  
+  <p>
+	<button type="submit" class="green">Crear</button>
+	<% if @taxon %>
+		<%= button_link "Volver a #{@taxon.nombre}", @taxon, "rosy" %>
+	<% end %>
+	<% if @sitio %>
+		<%= button_link "Volver a #{@sitio.id}", @sitio, "rosy" %>
+	<% end %>
+  </p>
+  
+<% end %>

@@ -1,0 +1,20 @@
+  	<%= f.error_messages %>
+	<table class="fields">
+		<tr class="required">
+			<td><%= f.label :pais_id %></td>
+			<td><%= region.pais.nombre %>
+				<%= f.hidden_field :pais_id %></td>
+		</tr>
+		<tr class="required">
+			<td><%= f.label :nombre %></td>
+			<td><%= f.text_field :nombre %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :codigo %></td>
+			<td> <%= f.text_field :codigo %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :ADM1 %></td>
+			<td><%= f.text_field :ADM1 %></td>
+		</tr>
+	</table>

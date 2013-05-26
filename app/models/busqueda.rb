@@ -1,5 +1,7 @@
 class Busqueda < ActiveRecord::Base
   
+  belongs_to :usuario
+  
   belongs_to :categoria
   
   validates_presence_of :nombre, :usuario_id

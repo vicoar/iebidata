@@ -1,0 +1,28 @@
+<% title "Imagen #{@imagen.id}" %>
+
+<h1><%= yield :title %></h1>
+
+<%= image_tag @imagen.url(:med), :alt => yield(:title), :'max-width' => '100%' %>
+
+<hr />
+
+<p>
+  <b>Archivo:</b>
+  <%=h @imagen.url %>
+</p>
+
+<p>
+  <b>Comentario:</b>
+  <%=h @imagen.comentario %>
+</p>
+
+<p>
+  <b>Posicion:</b>
+  <%=h @imagen.posicion %>
+</p>
+
+<p>
+	<%= button_link "Editar", edit_imagen_path(@imagen), "blue" %>
+	<%= delete_button @imagen %>
+	<%= button_link "Volver a #{@imagen.album_type}", album_path(@imagen), "rosy" %>
+</p>

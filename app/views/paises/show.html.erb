@@ -1,0 +1,138 @@
+<% title "Pais: #{@pais.nombre}"%>
+
+<h1><%= yield :title %></h1>
+
+
+	<fieldset>
+		<legend>Detalles de <%= h @pais.nombre %></legend>
+		
+		<div class="dp50">
+			<table class="fields">
+				<tr>
+				  <td>Nombre:</td>
+				  <td><%=h @pais.nombre %></td>
+				</tr>
+				
+				<tr>
+				  <td>Nombre ingles:</td>
+				  <td><%=h @pais.nombre_ingles %></td>
+				</tr>
+				
+				<tr>
+				  <td>Fips104:</td>
+				  <td><%=h @pais.FIPS104 %></td>
+				</tr>
+				
+				<tr>
+				  <td>ISO 2:</td>
+				  <td><%=h @pais.ISO2 %></td>
+				</tr>
+				
+				<tr>
+				  <td>ISO 3:</td>
+				  <td><%=h @pais.ISO3 %></td>
+				</tr>
+				
+				<tr>
+				  <td>ISON:</td>
+				  <td><%=h @pais.ISON %></td>
+				</tr>
+				
+				<tr>
+				  <td>Extension de Internet:</td>
+				  <td><%=h @pais.internet %></td>
+				</tr>
+				
+				<tr>
+				  <td>Capital:</td>
+				  <td><%=h @pais.capital %></td>
+				</tr>
+			</table>
+		</div>
+		<div class="dp50">
+			<table class="fields">
+				<tr>
+				  <td>Continente:</td>
+				  <td><%=h @pais.continente %></td>
+				</tr>
+				
+				<tr>
+				  <td>Nacionalidad singular:</td>
+				  <td><%=h @pais.nacionalidad_singular %></td>
+				</tr>
+				
+				<tr>
+				  <td>Nacionalidad plural:</td>
+				  <td><%=h @pais.nacionalidad_plural %></td>
+				</tr>
+				
+				<tr>
+				  <td>Moneda:</td>
+				  <td><%=h @pais.moneda %></td>
+				</tr>
+				
+				<tr>
+				  <td>Moneda simbolo:</td>
+				  <td><%=h @pais.moneda_simbolo %></td>
+				</tr>
+				
+				<tr>
+				  <td>Poblacion:</td>
+				  <td><%=h @pais.poblacion %></td>
+				</tr>
+				
+				<tr>
+				  <td>Titulo:</td>
+				  <td><%=h @pais.titulo %></td>
+				</tr>
+				
+				<tr>
+				  <td>Comentario:</td>
+				  <td><%=h @pais.comentario %></td> 
+				</tr>
+			</table>
+		</div>
+		
+		<p> 
+			<%= button_link 'Editar', edit_pais_path(@pais), "blue" %>
+			<%= delete_button pais_path(@pais) %>
+			<%= button_link 'Volver a Lista', paises_path, "black" %>
+		</p>
+	</fieldset>
+
+
+
+<div class="dp50">
+	<fieldset>
+		<legend>Regiones</legend>
+		<div class="resaltado">
+			<p>Debe existir una region el nombre <b><%= @pais.nombre %></b> que servira para agrupar otras regiones no listadas</p>
+		</div>
+		
+		<table class="lista zebra">
+		  <tr>
+		    <th>Nombre</th>
+		    <th>Codigo</th>
+		    <th>Adm1</th>
+		  </tr>
+		
+		<% @regiones.each do |region| %>
+		  <tr>
+		    <td><%=link_to h(region.nombre), region %></td>
+		    <td><%=h region.codigo %></td>
+		    <td><%=h region.ADM1 %></td>
+		  </tr>
+		<% end %>
+		</table>
+		
+		<br />
+	
+		<%= paginate @regiones %>
+		
+		<br />
+		
+		<%= button_link 'Agregar region', new_pais_region_path(@pais), "orange" %>
+	</fieldset>
+</div>
+
+<br class="clear" />

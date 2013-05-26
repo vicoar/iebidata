@@ -1,0 +1,47 @@
+<% title "Clave: #{h @clave.dilema}" %>
+
+<%= raw breadcrums_clave(@clave) %>
+
+<h2><%= @clave.dilema %></h2>
+
+
+<fieldset>
+	<legend>Opciones</legend>
+	
+	<%= form_for @clave, :url => cambiar_clave_path, :method => :put do |f| %>
+		<table id="opciones" class="fields">		
+		  <% for child in @clave.children %>
+			<% @child = child %>
+			<%= error_messages_for :child %>
+			<tr class="opcion">
+			  <%= fields_for_child(child) do |c| %>
+			    <td><%= c.label :dilema, 'Opcion:' %></td>
+				<td><%= c.text_field :dilema %></td>
+				<td></td>
+			  <% end %>
+			</tr>
+		  <% end %>
+		</table>
+
+		<p>
+			<button id="agregar_opcion" class="small orange">Agregar otra opcion</button>
+		</p>
+
+		<p>
+			
+		    <button type="submit" class="blue">Modificar opciones</button>
+			<%= button_link "Volver a la Clave", @clave, "gray" %>
+  		</p>
+	<% end %>
+
+	<table>
+		<tr class="opcion hidden">
+			<%= fields_for_child(@clave.children.build) do |c| %>
+			  <td><%= c.label :dilema, 'Opcion:' %></td>
+			  <td><%= c.text_field :dilema %></td>
+			  <td><a class="eliminar" href="#"><span class="ui-icon ui-icon-closethick">Cerrar</span></a></td>
+			<% end %>
+		</tr>
+	</table>
+
+</fieldset>

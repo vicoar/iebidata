@@ -1,0 +1,38 @@
+<%= title "Ficha de Coleccion de #{@ejemplar.nombre}" %>
+
+<h1 class="noprint"><%= yield :title %></h1>
+
+
+<% especie = @ejemplar.taxon
+   muestra = @ejemplar.muestra
+   sitio   = @ejemplar.sitio %>
+   
+<fieldset class="noprint">
+	<legend>Copias</legend>
+	<form action="#" id="copiar">
+		<%= label_tag 'copias', 'Cantidad de copias' %>
+		<%= select_tag 'copias', options_for_select(1..20) %>
+		<button type="submit" class="blue">Cambiar</button>
+	</form>
+</fieldset>
+
+<div id="fichas">
+	<p class="ficha">
+		Nro. Especie:
+		<%= especie.numero_especie %> |
+	
+		Localidad:
+		<%= "#{sitio.region.nombre}, #{sitio.pais.nombre}" %> |
+		
+		Colector:
+		<%= muestra.colector.nombre %> |
+	
+		Identificador:
+		<%= muestra.identificador.nombre %> |
+	
+		Nro. Coleccion:
+		<%= @ejemplar.nombre  %>
+	</p>
+</div>
+
+<%= button_link "Volver a Ejemplar #{@ejemplar.nombre}", @ejemplar, "rosy" %>

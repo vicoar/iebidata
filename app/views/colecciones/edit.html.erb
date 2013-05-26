@@ -1,0 +1,14 @@
+<% title "Editar Coleccion" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@coleccion) do |f| %>
+
+  <%= render :partial => "form", :locals => {:f => f} %>
+  
+  <p>
+    <button type="submit" class="blue">Actualizar</button>
+	<%= button_link "Cancelar", @coleccion, "gray" %>
+	<%= button_link "Volver a Lista de Colecciones", colecciones_path, "black" %>
+  </p>
+<% end %>

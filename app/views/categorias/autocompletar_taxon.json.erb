@@ -1,0 +1,3 @@
+<% cache "categorias/#{@categoria ? @categoria.id : 0}/autocompletar_taxon/#{@cadena}" do %>
+	<%= raw @taxones.to_json %>
+<% end %>

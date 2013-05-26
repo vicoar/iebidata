@@ -1,0 +1,31 @@
+<% title "Lista de Categorias"%>
+
+<h1><%= yield :title %></h1>
+
+<div class="resaltado">
+	<h2>Categorias taxonomicas</h2>
+	<p>Las Categorias Taxonomicas estan agrupadas por Nivel, y las Subcategorias por subnivel.</p>
+	<p>Por ejemplo la Categoria Orden tiene por subcategoria superior Superorden, entonces esta debera estar en -1, y por subcategoria inferior Suborden esta va con subnivel en +1.
+	   Orden por ser una Categoria deberia ir con subnivel en 0.
+	</p>
+</div>
+
+<table class="lista zebra">
+  <tr>
+  	<th>Nivel</th>
+	<th>Subnivel</th>
+    <th>Nombre</th>
+  </tr>
+
+<% @categorias.each do |categoria| %>
+  <tr>
+  	<td><%=h categoria.nivel %></td>
+	<td><%=h categoria.subnivel %></td>
+    <td><%=link_to h(categoria.nombre), categoria %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= button_link 'Nueva Categoria', new_categoria_path, "green" %>

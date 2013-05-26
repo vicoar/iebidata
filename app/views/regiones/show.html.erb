@@ -1,0 +1,28 @@
+<% title "Region: #{h @region.nombre}"%>
+
+<h1><%= yield :title %></h1>
+
+<table class="fields">
+	<tr>
+	  <td>Pais:</td>
+	  <td><%=link_to h(@region.pais.nombre), pais_path(@region.pais) %></td>
+	</tr>
+	<tr>
+		<td>Nombre:</td>
+		<td><%=h @region.nombre %></td>
+	</tr>
+	<tr>
+		<td>Codigo:</td>
+		<td><%=h @region.codigo %></td>
+	</tr>
+	<tr>
+		<td>Adm1:</td>
+		<td><%=h @region.ADM1 %></td>
+	</tr>
+</table>
+
+<p>
+	<%= button_link 'Editar', edit_region_path(@region), "blue" %>
+	<%= delete_button region_path(@region) %>
+	<%= button_link "Volver a #{h @region.pais.nombre}", pais_path(@region.pais), "rosy" %>
+</p>

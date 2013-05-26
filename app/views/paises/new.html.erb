@@ -1,0 +1,14 @@
+<% title "Nuevo Pais"%>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@pais, :url => paises_path) do |f| %>
+
+  <%= render :partial => "form", :locals => { :f => f } %>
+  
+  <p>
+    <button type="submit" class="green">Crear</button>
+    <%= button_link 'Volver a Lista', paises_path, "black" %>
+  </p>
+<% end %>
+

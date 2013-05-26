@@ -1,0 +1,31 @@
+<% title "Categoria #{@categoria.nombre}"%>
+
+<h1><%= yield :title %></h1>
+
+<table class="fields">
+	<tr>
+	  <td>Nivel:</td>
+	  <td><%=h @categoria.nivel %></td>
+	</tr>
+	
+	<tr>
+	  <td>Subnivel:</td>
+	  <td><%=h @categoria.subnivel %></td>
+	</tr>
+	
+	<tr>
+	  <td>Nombre:</td>
+	  <td><%=h @categoria.nombre %></td>
+	</tr>
+	
+	<tr>
+	  <td>Descripcion:</td>
+	  <td><%=h @categoria.descripcion %></td>
+	</tr>
+</table>
+
+<p>
+	<%= button_link 'Editar', edit_categoria_path(@categoria), "blue" %>
+	<%= delete_button @categoria %>
+	<%= button_link 'Volver a Lista', categorias_path, "black" %>
+</p>

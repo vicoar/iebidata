@@ -1,0 +1,44 @@
+  <%= f.error_messages %>
+  
+  <table class="fields">
+	  <tr>
+	    <td><%= f.label :parent_id, "Superior" %></td>
+		<td><%= f.select :parent_id, padre_taxon(taxon) {|i| "#{'–––|' * i.level}––– #{i.categoria.nombre}: #{i.nombre}" }, { :include_blank => true } %></td>
+	  </tr>
+	
+	  <tr class="required">
+	    <td><%= f.label :categoria_id %></td>
+	    <td><%= f.collection_select :categoria_id, Categoria.all, :id, :nombre %></td>
+	  </tr>
+	  
+	  <tr class="required">
+	    <td><%= f.label :nombre %></td>
+	    <td><%= f.text_field :nombre %></td>
+	  </tr>
+	  
+	  <tr>
+        <td><%= f.label :visible, 'Visibilidad'  %></td>
+        <td>
+            ¿Quien puede ver este taxon?
+            <%= f.select :visible, options_for_select([["Solo los usuarios registrados", 0], ["Los registrados y no registrados (visitantes)", 1]]) %><br />
+            
+            ¿A que taxones se debe aplicar esta visibilidad?
+            <%= f.select :aplicar_visibilidad_a_hijos_y_padres, options_for_select([["Solo a este taxon", 0], ["A sus padres y descendientes", 1]]) %>
+        </td>
+      </tr>
+	  
+	  <tr>
+	    <td><%= f.label :coleccion_id, "Coleccion (Solo Morfo/Especie)" %></td>
+	    <td><%= f.collection_select :coleccion_id, Coleccion.all, :id, :numero_y_nombre, :include_blank => true %></td>
+	  </tr>
+	  
+	  <tr>
+	    <td><%= f.label :numero_especie, "Numero Especie (Solo Morfo/Especie)" %></td>
+	    <td><%= f.text_field :numero_especie %></td>
+	  </tr>
+	  
+	  <tr>
+	    <td><%= f.label :descripcion %></td>
+	    <td><%= f.text_area :descripcion %></td>
+	  </tr>
+  </table>

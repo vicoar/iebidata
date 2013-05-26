@@ -1,0 +1,23 @@
+<% title "Nueva Invitacion" %>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for @invitacion do |f| %>
+  <%= f.error_messages %>
+  
+  <table class="fields">
+    <tr>
+      <td><%= f.label :nombre, 'Nombre y Apellido' %></td>
+      <td><%= f.text_field :nombre %></td>
+    </tr>
+    <tr class="required">
+      <td><%= f.label :destinatario_email, 'E-Mail' %></td>
+      <td><%= f.text_field :destinatario_email %></td>
+    </tr>
+  </table>
+  
+  <p>
+    <button type="submit" class="green visible">Enviar invitacion</button>
+    <%= button_link "Volver a Lista", invitaciones_path, "black admin" %>
+  </p>
+<% end %>

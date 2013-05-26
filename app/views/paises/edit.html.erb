@@ -1,0 +1,15 @@
+<% title "Editando Pais"%>
+
+<h1><%= yield :title %></h1>
+
+<%= form_for(@pais, :url => pais_path(@pais)) do |f| %>
+  
+  <%= render :partial => "form", :locals => { :f => f } %>
+  
+  <p>
+    <button type="submit" class="blue">Actualizar</button>
+	<%= button_link 'Cancelar', pais_path(@pais), "gray" %>
+	<%= button_link 'Volver a Lista', paises_path, "black" %>
+  </p>
+<% end %>
+
