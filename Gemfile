@@ -8,6 +8,7 @@ gem 'rails', '3.2.13'
 gem 'mysql2'
 gem 'authlogic'
 gem 'declarative_authorization'
+gem "therubyracer", :require => 'v8'
 
 gem 'dynamic_form'
 gem 'kaminari'
