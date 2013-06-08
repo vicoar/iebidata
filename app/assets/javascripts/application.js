@@ -14,7 +14,6 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require rails
-//= require chromeframe
 //= require cookie-flash-rails
 //= require cookie
 //= require flash
