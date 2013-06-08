@@ -32,8 +32,8 @@ module Paperclip
  
       begin
         success = Paperclip.run(command, params)
-      rescue Paperclip::Errors::PaperclipCommandLineError
-        raise PaperclipError, "There was an error processing the watermark for #{@basename}" if @whiny
+      rescue Exception => e  
+        raise "There was an error processing the watermark for #{@basename}. #{e}" if @whiny
       end
  
       dst
