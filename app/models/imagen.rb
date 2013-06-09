@@ -25,8 +25,8 @@ class Imagen < ActiveRecord::Base
       }, 
       :max => "1024x768>", 
       :clave => "400x400#" },
-    :url  => "/assets/imagenes/:id/:style/:basename.:extension",
-    :path => "/assets/imagenes/:id/:style/:filename"
+    :url  => "/assets/uploads/imagenes/:id/:style/:basename.:extension",
+    :path => ":rails_root/assets/uploads/imagenes/:id/:style/:filename"
   
   delegate :url, :to => :imagen
   
