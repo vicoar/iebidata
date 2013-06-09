@@ -1,6 +1,5 @@
 /* http://stackoverflow.com/questions/2161159/get-script-path */
-var base = $('script[src*="events"]').attr('src').split('?')[0];
-base = base.split('/').slice(0, -1).join('/')+'/';
+var base = "/assets/";
 
 var js = {
 	cookie : base + "cookie-flash-rails.js"
