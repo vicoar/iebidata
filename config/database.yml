@@ -7,10 +7,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: iebidata_production
+  database: iebidata_development
   pool: 5
   username: root
-  password: toor
+  password:
   host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
@@ -26,8 +26,8 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: iebidata_production
+  database: iebidata
   pool: 5
-  username: root
-  password: toor
+  username: iebidata_rails
+  password: 03.bread.MELODY.found.83
   host: 127.0.0.1
